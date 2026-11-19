@@ -1,0 +1,51 @@
+# ==========================================================================
+# NeuroAr — .htaccess  (colocar en la raíz pública: /public_html o equivalente)
+# Requiere mod_rewrite. Probar primero en un entorno de pruebas.
+# ==========================================================================
+
+Options -MultiViews
+DirectoryIndex index.html index.php
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# --- 1. Forzar HTTPS (quitar este bloque si el hosting ya lo hace) --------
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# --- 2. Portal heredado de acceso -> app.neuroar.com.co ------------------
+# QSD descarta la query string (Apache 2.4+) para no arrastrar parámetros viejos.
+RewriteRule ^neuroAR2/login\.php$              https://app.neuroar.com.co/ [NC,R=301,L,QSD]
+RewriteRule ^neuroAR2/(home/)?recovery\.php$   https://app.neuroar.com.co/recuperacionContrasena/validacionEmail [NC,R=301,L,QSD]
+RewriteRule ^vrprueba/vrweb(/.*)?$             https://app.neuroar.com.co/ [NC,R=301,L,QSD]
+
+# --- 3. Sostenibilidad: una sola URL limpia -> /sostenibilidad ------------
+# 3a. Rutas antiguas redirigen (301) a la URL limpia
+RewriteRule ^neuroAR2/home/sostenibilidad\.php$ /sostenibilidad [NC,R=301,L,QSD]
+RewriteRule ^sostenibilidad\.php$               /sostenibilidad [R=301,L,QSD]
+
+# 3b. Si alguien pide /sostenibilidad.html directamente, también va a la limpia
+#     (se evalúa THE_REQUEST para no entrar en bucle con la reescritura interna)
+RewriteCond %{THE_REQUEST} \s/sostenibilidad\.html[\s?]
+RewriteRule ^ /sostenibilidad [R=301,L,QSD]
+
+# 3c. La URL limpia sirve el archivo (reescritura interna, sin cambiar la URL)
+RewriteRule ^sostenibilidad/?$ sostenibilidad.html [L]
+</IfModule>
+
+# --- 4. Caché de recursos estáticos (rendimiento) --------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png  "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif  "access plus 1 year"
+  ExpiresByType text/css   "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# --- 5. Compresión de texto -------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
+</IfModule>
