@@ -871,7 +871,7 @@
       if (reducedMotion) return;
       const viewport = window.innerHeight;
       stackPanels.forEach((panel, i) => {
-        const next = stackPanels[i + 1] || $('.site-footer');
+        const next = panel.nextElementSibling || $('.site-footer');
         if (!next) return;
         const p = Math.min(Math.max((viewport - next.getBoundingClientRect().top) / viewport, 0), 1);
         panel.style.setProperty('--p', p.toFixed(3));

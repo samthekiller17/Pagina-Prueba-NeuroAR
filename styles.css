@@ -697,14 +697,24 @@ p { margin: 0 0 var(--s-2); }
   transform: scale(calc(1 - var(--p, 0) * 0.06));
   will-change: transform;
 }
-.stack:not(.section--soft):not(.hero) { background-color: var(--bg); }
-.hero.stack { border-radius: 0; border-top: 0; box-shadow: none; }
+/* Una tarjeta fija sigue debajo del contenido que viene después: todas las
+   secciones necesitan fondo opaco y el mismo z-index (decide el orden). */
+main > .section { z-index: 1; }
+main > .section:not(.section--soft) { background-color: var(--bg); }
+/* La sección que sube sobre una tarjeta fija también luce como tarjeta */
+.stack + .section:not(.stack) {
+  position: relative; z-index: 1;
+  border-radius: 36px 36px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 -30px 60px -20px rgba(0, 0, 0, 0.7);
+}
+.stack + .section:not(.stack):not(.section--soft) { background-color: var(--bg); }
 .stack-shade {
   position: absolute; inset: 0; z-index: 20; border-radius: inherit; pointer-events: none;
   background: #000; opacity: calc(var(--p, 0) * 0.6);
 }
 /* Indicador de "tarjeta": una pequeña barra arriba al centro */
-.stack:not(.hero)::after {
+.stack::after, .stack + .section::after {
   content: ""; position: absolute; z-index: 21; top: 12px; left: 50%; width: 44px; height: 4px; margin-left: -22px;
   border-radius: 4px; background: rgba(255, 255, 255, 0.12); pointer-events: none;
 }
@@ -712,7 +722,7 @@ p { margin: 0 0 var(--s-2); }
 .site-footer { z-index: 2; border-radius: 36px 36px 0 0; box-shadow: 0 -30px 60px -20px rgba(0, 0, 0, 0.7); }
 
 @media (max-width: 640px) {
-  .stack { border-radius: 24px 24px 0 0; }
+  .stack, .stack + .section:not(.stack) { border-radius: 24px 24px 0 0; }
   .site-footer { border-radius: 24px 24px 0 0; }
 }
 @media (prefers-reduced-motion: reduce) {
