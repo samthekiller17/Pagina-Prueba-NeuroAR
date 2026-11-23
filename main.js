@@ -1,9 +1,9 @@
 /* ==========================================================================
    NeuroAr — main.js
-   1 Idioma ES|EN · 2 Menú móvil · 3 Anclas heredadas · 4 Progreso de lectura
-   5 Red neuronal del hero · 6 Rotador de palabras · 7 Demo go / no-go
-   8 Preselección de servicio · 9 Formulario · 10 Widget · 11 Scrollspy
-   12 Lightbox · 13 Reveal · 14 Spotlight · 15 Imágenes ausentes
+   1 Idioma ES|EN · 2 Menú móvil · 3 Anclas heredadas · 5 Red neuronal del
+   hero · 6 Rotador de palabras · 7 Demo go / no-go · 8 Preselección de
+   servicio · 9 Formulario · 10 Widget · 11 Scrollspy · 12 Lightbox
+   14 Spotlight · 15 Imágenes ausentes · 16 Inicio fijo (único efecto de scroll)
    Cada bloque se activa solo si sus elementos existen, así el mismo archivo
    sirve para index.html y sostenibilidad.html.
    ========================================================================== */
@@ -276,18 +276,6 @@
   };
   followLegacyAnchor();
   window.addEventListener('hashchange', followLegacyAnchor);
-
-  /* ---- 4. Progreso de lectura ------------------------------------------ */
-  const progressBar = $('#read-progress-bar');
-  if (progressBar) {
-    const updateProgress = () => {
-      const total = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-      progressBar.style.transform = `scaleX(${Math.min(Math.max(window.scrollY / total, 0), 1)})`;
-    };
-    updateProgress();
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    window.addEventListener('resize', updateProgress);
-  }
 
   /* ---- 5. Red neuronal del hero -----------------------------------------
      Nodos dentro de la silueta 3D de un cerebro (vista lateral), conectados
@@ -815,26 +803,6 @@
     });
     lightbox.addEventListener('click', (event) => {
       if (event.target === lightbox || event.target.closest('[data-close]')) lightbox.close();
-    });
-  }
-
-  /* ---- 13. Aparición al desplazarse ------------------------------------- */
-  const REVEAL_SELECTOR = '.section__head, .loop__step, .uni, .green-band, .try__copy, .lab, .cogpanel, .sectors li, .dmaic__step, .ref, .city, .form, .card, .gallery li, .split > *, .contact > *';
-  if ('IntersectionObserver' in window && !reducedMotion) {
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.12 });
-
-    $$(REVEAL_SELECTOR).forEach((el) => {
-      if (el.closest('.reveal')) return; // evita animar dos veces lo anidado
-      const siblings = [...el.parentElement.children].filter((child) => child.matches(REVEAL_SELECTOR));
-      el.style.setProperty('--d', `${Math.min(siblings.indexOf(el), 5) * 80}ms`);
-      el.classList.add('reveal');
-      revealObserver.observe(el);
     });
   }
 
