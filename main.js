@@ -1,9 +1,11 @@
 /* ==========================================================================
    NeuroAr — main.js
-   1 Idioma ES|EN · 2 Menú móvil · 3 Tabs de soluciones · 4 Preselección de
-   servicio · 5 Formulario · 6 Widget flotante · 7 Scrollspy · 8 Lightbox
-   Cada bloque se activa solo si sus elementos existen en la página, así el
-   mismo archivo sirve para index.html y sostenibilidad.html.
+   1 Idioma ES|EN · 2 Menú móvil · 3 Anclas heredadas · 4 Progreso de lectura
+   5 Red neuronal del hero · 6 Rotador de palabras · 7 Demo go / no-go
+   8 Preselección de servicio · 9 Formulario · 10 Widget · 11 Scrollspy
+   12 Lightbox · 13 Reveal · 14 Spotlight · 15 Imágenes ausentes
+   Cada bloque se activa solo si sus elementos existen, así el mismo archivo
+   sirve para index.html y sostenibilidad.html.
    ========================================================================== */
 (() => {
   'use strict';
@@ -14,69 +16,143 @@
     // formulario abre el correo del usuario con el mensaje ya redactado.
     formEndpoint: '',
     email: 'Gerencia@neuroar.com.co',
+    whatsapp: '573003743575',
   };
 
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---- 1. Idioma ES | EN ------------------------------------------------
-     El texto en español vive en el HTML. Aquí solo se guarda la traducción al
-     inglés; al volver a ES se restaura el texto original guardado en data-*.
-     Solo se marcan con data-i18n elementos "hoja" (sin etiquetas hijas).     */
+     El español vive en el HTML. Aquí solo está el inglés; al volver a ES se
+     restaura el contenido original guardado. Los textos son estáticos y de
+     confianza, por eso se permite marcado simple (<strong>, <b>).            */
   const EN = {
-    'nav.solutions': 'Solutions',
-    'nav.dmaic': 'DMAIC Methodology',
-    'nav.cognitive': 'NeuroAr Cognitive',
-    'nav.about': 'About us',
-    'nav.contact': 'Contact',
-    'nav.app': 'NeuroAr App',
+    skip: 'Skip to content',
     'nav.menu': 'Menu',
-    'cta.diagnosis': 'Request a diagnosis',
-    'cta.explore': 'Explore solutions',
-    'cta.consult': 'Request this service',
-    'hero.eyebrow': 'Software · AI · Continuous improvement',
-    'hero.title': 'Software, AI and continuous improvement that turn processes into measurable results.',
-    'hero.lead': 'NeuroAr builds custom software, AI-powered improvement agents, knowledge platforms and virtual reality experiences for companies, institutions and people.',
-    'pillar.1.title': 'Software, AI and DMAIC for business',
-    'pillar.1.text': 'Custom software, AI and continuous improvement agents for companies.',
-    'pillar.2.title': 'Knowledge and NeuroAr Cognitive',
-    'pillar.2.text': 'Knowledge platforms and virtual reality for talent, education and health.',
-    'pillar.3.title': 'Environmental sustainability',
-    'pillar.3.text': 'Technology solutions for efficient resource use and environmental awareness.',
+    'nav.method': 'Method',
+    'nav.solutions': 'Solutions',
+    'nav.try': 'Try it',
+    'nav.sectors': 'Sectors',
+    'nav.about': 'About',
+    'nav.contact': 'Contact',
+    'nav.dmaic': 'DMAIC + AI',
+    'nav.cognitive': 'NeuroAr Cognitive',
+    'nav.app': 'NeuroAr App',
+    'cta.demo': 'Book a demo',
+    'cta.diagnosis': 'Book a demo',
+    'cta.try': 'Test your mind',
+    'cta.talk': 'Let’s talk about this',
+
+    'hero.tag': 'Neurotechnology made in Colombia',
+    'hero.title.a': 'Technology for',
+    'hero.title.b': 'the mind that',
+    'hero.title.sr': 'learns, recovers, finds its path, works safely and decides with data.',
+    'hero.lead': 'We combine <strong>neuroscience</strong>, <strong>virtual reality</strong> and <strong>artificial intelligence</strong> to assess, rehabilitate and enhance human abilities, in clinics, schools, companies, industry and government.',
+    'hero.eq.1': 'science',
+    'hero.eq.2': 'extended reality',
+    'hero.eq.3': 'predictive analytics',
+
+    'method.eyebrow': 'The NeuroAr method',
+    'method.title.a': 'Virtual reality is not the show.',
+    'method.title.b': 'It is the measuring instrument.',
+    'method.lead': 'Every immersive experience we design produces data on how a person pays attention, remembers, decides and reacts. AI turns that data into decisions.',
+    'method.1.t': 'Immerse',
+    'method.1.p': 'Controlled, safe virtual reality scenarios: cognitive tasks, job simulations or everyday situations.',
+    'method.2.t': 'Measure',
+    'method.2.p': 'Attention, memory, reaction time, executive functions and task performance, recorded objectively.',
+    'method.3.t': 'Predict',
+    'method.3.p': 'Artificial intelligence and predictive analytics to detect patterns, risks and opportunities in each profile or team.',
+    'method.4.t': 'Enhance',
+    'method.4.p': 'Training, rehabilitation or improvement plans that adapt every session, with results you can prove.',
+
     'sol.eyebrow': 'What we do',
-    'sol.title': 'Solutions that evolve with you',
-    'sol.lead': 'Pick a service to see its scope and key deliverables, then request a proposal for your organization.',
-    'tab.1': 'Custom software and AI',
-    'tab.2': 'DMAIC + AI Improvement Agents',
-    'tab.3': 'Enterprise Knowledge Platforms',
-    'tab.4': 'Virtual Reality and NeuroAr Cognitive',
-    'tab.5': 'Industrial Technology and Sustainability',
-    'dmaic.eyebrow': 'Smart Improvement Agents · Lean Six Sigma + AI',
-    'dmaic.title': 'From challenges to measurable results.',
-    'dmaic.lead': 'We combine the DMAIC methodology, artificial intelligence and custom development to diagnose, design, implement and sustain real solutions.',
-    'dmaic.method': 'DMAIC powered by AI',
-    'cog.eyebrow': 'Immersive learning',
-    'cog.title': 'NeuroAr Cognitive: learning by experiencing',
+    'sol.title': 'One technology core, four ways to transform people and organizations.',
+    'uni.1.chip': 'Health',
+    'uni.1.t': 'Neurorehabilitation and cognitive health',
+    'uni.1.p': 'Virtual reality tools for health professionals to assess, stimulate and track their patients’ cognitive functions.',
+    'uni.2.chip': 'Education',
+    'uni.2.t': 'Career guidance and immersive learning',
+    'uni.2.p': 'We help students discover their vocation with evidence, and schools and universities teach through experiences people live.',
+    'uni.2.test': 'Take the career test',
+    'uni.3.chip': 'Industry and business',
+    'uni.3.t': 'Immersive training and continuous improvement',
+    'uni.3.p': 'We simulate critical, high-risk tasks to train without exposing anyone, and combine Lean Six Sigma with AI to improve processes with measurable results.',
+    'uni.3.dmaic': 'See the DMAIC + AI method',
+    'uni.4.chip': 'Software and AI',
+    'uni.4.t': 'Custom software and predictive analytics',
+    'uni.4.p': 'Applications, platforms and AI assistants built on your data to automate tasks and anticipate decisions.',
+    'green.t': 'NeuroAr Sustainability',
+    'green.p': 'Virtual reality for environmental awareness and efficient use of resources.',
+
+    'try.eyebrow': 'Try it now · 30 seconds',
+    'try.title': 'How fast does your brain decide?',
+    'try.lead': 'This is a minimal version of a classic neuroscience task (go / no-go) that measures attention and impulse control.',
+    'try.rule.1': 'If a <b>cyan</b> circle appears, tap or press the space bar as fast as you can.',
+    'try.rule.2': 'If it is <b>violet</b>, do nothing.',
+    'try.note': 'A playful demo: not a clinical assessment and no data is stored. With NeuroAr Cognitive we measure this and much more, in virtual reality and with professional protocols.',
+    'try.start': 'Tap here to start',
+    'try.r.rt': 'Average reaction',
+    'try.r.hits': 'Hits',
+    'try.r.imp': 'Unchecked impulses',
+    'try.retry': 'Try again',
+    'try.cta': 'I want this for my organization',
+
+    'cog.eyebrow': 'Product · NeuroAr Cognitive',
+    'cog.title': 'A neuroscience lab that fits in a headset.',
+    'cog.lead': 'Cognitive testing and training in virtual reality, with results professionals review in the NeuroAr app.',
+    'cog.l1': 'Immersive, standardized and repeatable cognitive tests',
+    'cog.l2': 'Works with Meta Quest 2, 3 and 3S',
+    'cog.l3': 'Results and follow-up at app.neuroar.com.co',
+    'cog.l4': 'For health, education and talent teams',
     'cog.app': 'Open the app',
-    'cog.brochure': 'View brochure',
+    'cog.brochure': 'Download brochure',
+
+    'sec.eyebrow': 'Where we work',
+    'sec.title': 'Six sectors, one purpose: more capable people.',
+    'sec.1.t': 'Health', 'sec.1.p': 'Clinics, healthcare providers and rehabilitation professionals.',
+    'sec.2.t': 'Education', 'sec.2.p': 'Schools and universities that teach and guide differently.',
+    'sec.3.t': 'Mining and industry', 'sec.3.p': 'Technical training, safety and productivity.',
+    'sec.4.t': 'Companies', 'sec.4.p': 'Talent, knowledge and processes.',
+    'sec.5.t': 'Government', 'sec.5.p': 'Public innovation and well-being programs.',
+    'sec.6.t': 'Foundations', 'sec.6.p': 'Social projects with measurable impact.',
+
+    'dmaic.eyebrow': 'For business and industry · Lean Six Sigma + AI',
+    'dmaic.title': 'Improvement agents: from challenges to measurable results.',
+    'dmaic.lead': 'An external team combining DMAIC, artificial intelligence and custom development to diagnose, implement and sustain improvements, without permanently growing your engineering staff.',
+
     'ref.eyebrow': 'Track record and connections',
-    'ref.title': 'Organizations driving innovation with NeuroAr',
-    'about.eyebrow': 'About NeuroAr',
-    'about.title': 'About NeuroAr and our presence in Colombia',
+    'ref.title': 'Organizations we have built a path with',
+    'about.eyebrow': 'Who we are',
+    'about.title': 'We believe the most powerful technology is the one that understands people.',
+    'about.lead': 'NeuroAr is a Colombian technology-based company. We combine neuroscience, virtual reality, artificial intelligence and software development to solve real needs of health and education institutions, companies, industry and government.',
+    'about.hq': 'Headquarters',
+
     'contact.eyebrow': 'Let’s work together',
-    'contact.title': 'Tell us your challenge',
+    'contact.title': 'Which human ability do you want to enhance?',
+    'contact.lead': 'Tell us your challenge: a rehabilitation program, a career guidance process, high-risk training or a process that needs to improve. We will reply with a concrete proposal.',
+    'contact.mail': 'Email',
     'form.name': 'Full name',
     'form.company': 'Company or institution',
+    'form.optional': '(optional)',
     'form.email': 'Email',
     'form.phone': 'Phone / WhatsApp',
     'form.service': 'Service of interest',
     'form.message': 'How can we help?',
     'form.consent': 'I agree to the processing of my data to answer this request.',
     'form.submit': 'Send request',
-    'footer.tagline': 'Software · Knowledge · Innovation',
+
+    'footer.tagline': 'Neuroscience · Virtual reality · Artificial intelligence',
+    'footer.test': 'Career test',
     'footer.sustainability': 'Sustainability',
+
     'widget.toggle': 'Let’s talk?',
+    'widget.status': 'Available now',
     'widget.hello': 'Hi! I am the NeuroAr assistant.',
+    'widget.ask': 'What kind of organization are you looking for a solution for?',
+    'widget.t1': 'Health',
+    'widget.t2': 'Education',
+    'widget.t3': 'Business or industry',
     'widget.whatsapp': 'Continue on WhatsApp',
     'widget.form': 'I prefer to leave my details in the form',
   };
@@ -89,33 +165,54 @@
     'form.message': 'Briefly describe your challenge or project',
   };
 
-  const EN_MESSAGES = {
-    required: 'This field is required.',
-    email: 'Enter a valid email address.',
-    sending: 'Sending…',
-    sent: 'Thanks! We received your request and will contact you soon.',
-    failed: 'We could not send the form. Please write to ' + CONFIG.email + ' or use WhatsApp.',
-    mailto: 'Opening your email app with the message ready to send.',
-  };
-  const ES_MESSAGES = {
-    required: 'Este campo es obligatorio.',
-    email: 'Escribe un correo válido.',
-    sending: 'Enviando…',
-    sent: '¡Gracias! Recibimos tu solicitud y te contactaremos pronto.',
-    failed: 'No pudimos enviar el formulario. Escríbenos a ' + CONFIG.email + ' o por WhatsApp.',
-    mailto: 'Abriendo tu aplicación de correo con el mensaje listo para enviar.',
+  const MESSAGES = {
+    es: {
+      required: 'Este campo es obligatorio.',
+      email: 'Escribe un correo válido.',
+      sending: 'Enviando…',
+      sent: '¡Gracias! Recibimos tu solicitud y te contactaremos pronto.',
+      failed: `No pudimos enviar el formulario. Escríbenos a ${CONFIG.email} o por WhatsApp.`,
+      mailto: 'Abriendo tu aplicación de correo con el mensaje listo para enviar.',
+      words: ['aprende.', 'se recupera.', 'elige su futuro.', 'trabaja segura.', 'decide con datos.'],
+      labGet: 'Prepárate…',
+      labTooSoon: '¡Muy pronto! Espera el círculo.',
+      labLive: (n, t) => `Ensayo ${n} de ${t}`,
+      labDone: 'Resultado listo',
+      labFast: 'Reacción veloz y buen control de impulsos. Tu cerebro decide rápido… y frena a tiempo.',
+      labImpulsive: 'Rápido, pero con impulsos que se escaparon. Ese equilibrio entre velocidad y control es justo lo que entrenamos.',
+      labSteady: 'Preciso y cuidadoso. En una evaluación completa veríamos cómo se sostiene tu atención con el tiempo.',
+      labMissed: 'Varios estímulos se escaparon. La atención fluctúa, y medir esa fluctuación es parte de lo que hacemos.',
+    },
+    en: {
+      required: 'This field is required.',
+      email: 'Enter a valid email address.',
+      sending: 'Sending…',
+      sent: 'Thanks! We received your request and will contact you soon.',
+      failed: `We could not send the form. Please write to ${CONFIG.email} or use WhatsApp.`,
+      mailto: 'Opening your email app with the message ready to send.',
+      words: ['learns.', 'recovers.', 'finds its path.', 'works safely.', 'decides with data.'],
+      labGet: 'Get ready…',
+      labTooSoon: 'Too soon! Wait for the circle.',
+      labLive: (n, t) => `Trial ${n} of ${t}`,
+      labDone: 'Result ready',
+      labFast: 'Fast reactions and solid impulse control. Your brain decides quickly… and brakes in time.',
+      labImpulsive: 'Fast, but some impulses got through. That balance between speed and control is exactly what we train.',
+      labSteady: 'Accurate and careful. A full assessment would show how your attention holds up over time.',
+      labMissed: 'Several stimuli slipped by. Attention fluctuates, and measuring that is part of what we do.',
+    },
   };
 
   let lang = 'es';
-  const msg = (key) => (lang === 'en' ? EN_MESSAGES : ES_MESSAGES)[key];
+  const msg = (key) => MESSAGES[lang][key];
+  const langListeners = [];
 
   function setLang(next) {
     lang = next;
     document.documentElement.lang = next;
 
     $$('[data-i18n]').forEach((el) => {
-      if (!('i18nEs' in el.dataset)) el.dataset.i18nEs = el.textContent; // guarda el original ES
-      el.textContent = next === 'en' ? (EN[el.dataset.i18n] ?? el.dataset.i18nEs) : el.dataset.i18nEs;
+      if (!('i18nEs' in el.dataset)) el.dataset.i18nEs = el.innerHTML; // guarda el original ES
+      el.innerHTML = next === 'en' ? (EN[el.dataset.i18n] ?? el.dataset.i18nEs) : el.dataset.i18nEs;
     });
 
     $$('[data-i18n-placeholder]').forEach((el) => {
@@ -129,16 +226,13 @@
       button.setAttribute('aria-pressed', String(button.dataset.lang === next));
     });
 
+    langListeners.forEach((fn) => fn(next));
     try { localStorage.setItem('neuroar-lang', next); } catch (_) { /* almacenamiento bloqueado */ }
   }
 
   $$('.lang-switch button').forEach((button) => {
     button.addEventListener('click', () => setLang(button.dataset.lang));
   });
-
-  let storedLang = 'es';
-  try { storedLang = localStorage.getItem('neuroar-lang') === 'en' ? 'en' : 'es'; } catch (_) { /* ignorar */ }
-  setLang(storedLang);
 
   /* ---- 2. Menú móvil accesible ----------------------------------------- */
   const nav = $('#site-nav');
@@ -150,223 +244,406 @@
       navToggle.setAttribute('aria-expanded', String(open));
       navToggle.classList.toggle('is-open', open);
     };
-
     navToggle.addEventListener('click', () => setMenu(nav.dataset.open !== 'true'));
     nav.addEventListener('click', (event) => { if (event.target.closest('a')) setMenu(false); });
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && nav.dataset.open === 'true') {
-        setMenu(false);
-        navToggle.focus();
-      }
+      if (event.key === 'Escape' && nav.dataset.open === 'true') { setMenu(false); navToggle.focus(); }
     });
     window.matchMedia('(min-width: 1024px)').addEventListener('change', () => setMenu(false));
   }
 
-  /* ---- 3. Tabs de soluciones (patrón ARIA tabs) ------------------------- */
-  const tabs = $$('[role="tab"]');
-  const panels = tabs.map((tab) => document.getElementById(tab.getAttribute('aria-controls')));
-
-  // Enlaces antiguos (#detalle-*) → pestaña equivalente
+  /* ---- 3. Anclas heredadas → secciones nuevas ---------------------------
+     Por si existen enlaces guardados a la estructura anterior del sitio.    */
   const LEGACY_ANCHORS = {
-    '#detalle-software': 0,
-    '#detalle-ia': 0,
-    '#detalle-plataformas': 2,
-    '#detalle-realidad-virtual': 3,
-    '#detalle-educacion': 3,
-    '#detalle-industrial': 4,
+    '#detalle-software': '#software',
+    '#detalle-ia': '#software',
+    '#panel-software-ia': '#software',
+    '#detalle-plataformas': '#industria',
+    '#conocimiento': '#industria',
+    '#panel-dmaic-ia': '#dmaic',
+    '#detalle-industrial': '#industria',
+    '#detalle-realidad-virtual': '#inmersivo',
+    '#panel-cognitivo': '#inmersivo',
+    '#detalle-educacion': '#educacion',
+    '#panel-sostenibilidad': '#soluciones',
+    '#presencia': '#nosotros',
   };
+  const followLegacyAnchor = () => {
+    const target = LEGACY_ANCHORS[location.hash] && $(LEGACY_ANCHORS[location.hash]);
+    if (!target) return;
+    history.replaceState(null, '', LEGACY_ANCHORS[location.hash]);
+    target.scrollIntoView();
+  };
+  followLegacyAnchor();
+  window.addEventListener('hashchange', followLegacyAnchor);
 
-  function activateTab(index, { focus = false } = {}) {
-    tabs.forEach((tab, i) => {
-      const selected = i === index;
-      tab.setAttribute('aria-selected', String(selected));
-      tab.tabIndex = selected ? 0 : -1;
-      panels[i].hidden = !selected;
-    });
-    if (focus) tabs[index].focus();
-  }
-
-  function openTabFromHash() {
-    const hash = location.hash;
-    if (!hash || !tabs.length) return;
-    const index = hash in LEGACY_ANCHORS
-      ? LEGACY_ANCHORS[hash]
-      : panels.findIndex((panel) => `#${panel.id}` === hash);
-    if (index < 0) return;
-    activateTab(index);
-    panels[index].scrollIntoView(); // el panel estaba oculto: el navegador no pudo desplazarse solo
-  }
-
-  if (tabs.length) {
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => activateTab(index));
-      tab.addEventListener('keydown', (event) => {
-        const last = tabs.length - 1;
-        const keyToIndex = {
-          ArrowRight: index === last ? 0 : index + 1,
-          ArrowDown: index === last ? 0 : index + 1,
-          ArrowLeft: index === 0 ? last : index - 1,
-          ArrowUp: index === 0 ? last : index - 1,
-          Home: 0,
-          End: last,
-        };
-        if (event.key in keyToIndex) {
-          event.preventDefault();
-          activateTab(keyToIndex[event.key], { focus: true });
-        }
-      });
-    });
-
-    activateTab(0);
-    openTabFromHash();
-    window.addEventListener('hashchange', openTabFromHash);
-
-    // La consola de capacidades abre la solución asociada y conserva el flujo visual.
-    $$('[data-deck-focus]').forEach((control) => {
-      control.addEventListener('click', (event) => {
-        event.preventDefault();
-        const index = Number(control.dataset.deckFocus);
-        if (!Number.isInteger(index) || !tabs[index]) return;
-        activateTab(index);
-        $$('.console-card').forEach((card) => card.classList.toggle('console-card--active', card === control));
-        document.querySelector('#soluciones').scrollIntoView({ behavior: 'smooth' });
-        window.setTimeout(() => tabs[index].focus({ preventScroll: true }), 450);
-      });
-    });
-  }
-
-  /* ---- 3b. Profundidad visual y progreso de lectura --------------------- */
+  /* ---- 4. Progreso de lectura ------------------------------------------ */
   const progressBar = $('#read-progress-bar');
-  const heroVisual = $('.hero__visual');
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const updateProgress = () => {
-    if (!progressBar) return;
-    const total = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-    progressBar.style.transform = `scaleX(${Math.min(Math.max(window.scrollY / total, 0), 1)})`;
-  };
-  updateProgress();
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  window.addEventListener('resize', updateProgress);
-
-  if (heroVisual && !reducedMotion && window.matchMedia('(pointer: fine)').matches) {
-    heroVisual.addEventListener('pointermove', (event) => {
-      const rect = heroVisual.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      heroVisual.style.setProperty('--rx', `${-y * 7}deg`);
-      heroVisual.style.setProperty('--ry', `${x * 9}deg`);
-      heroVisual.style.setProperty('--px', `${50 + x * 18}%`);
-      heroVisual.style.setProperty('--py', `${50 + y * 18}%`);
-    });
-    heroVisual.addEventListener('pointerleave', () => {
-      heroVisual.style.removeProperty('--rx');
-      heroVisual.style.removeProperty('--ry');
-      heroVisual.style.removeProperty('--px');
-      heroVisual.style.removeProperty('--py');
-    });
+  if (progressBar) {
+    const updateProgress = () => {
+      const total = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+      progressBar.style.transform = `scaleX(${Math.min(Math.max(window.scrollY / total, 0), 1)})`;
+    };
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
   }
 
-  // Campo espacial del hero: proyección de nodos 3D dibujada sin librerías.
-  // Se pausa fuera de pantalla y se omite cuando el usuario reduce movimiento.
+  /* ---- 5. Red neuronal del hero -----------------------------------------
+     Nodos dentro de la silueta 3D de un cerebro (vista lateral), conectados
+     con sus vecinos. Impulsos eléctricos viajan por las conexiones y se
+     encadenan; el cursor "estimula" las neuronas cercanas. Sin librerías.
+     Con "reducir movimiento" se dibuja un único fotograma estático.         */
   const heroCanvas = $('#hero-canvas');
   const heroSection = $('.hero');
-  if (heroCanvas && heroSection && !reducedMotion && heroCanvas.getContext) {
-    const context = heroCanvas.getContext('2d');
-    const points = [];
+
+  if (heroCanvas && heroSection && heroCanvas.getContext) {
+    const ctx = heroCanvas.getContext('2d');
+    const nodes = [];
+    const pulses = [];
+    let width = 0;
+    let height = 0;
+    let cx = 0;
+    let cy = 0;
+    let scale = 1;
     let frameId = 0;
     let visible = true;
-    let canvasWidth = 0;
-    let canvasHeight = 0;
-    let pointerX = 0;
-    let pointerY = 0;
+    const pointer = { x: -9999, y: -9999, active: false };
 
-    const buildPoints = () => {
-      points.length = 0;
-      const count = Math.min(72, Math.max(38, Math.round(canvasWidth / 22)));
-      for (let i = 0; i < count; i += 1) {
-        points.push({
-          x: (Math.random() - 0.5) * canvasWidth * 1.25,
-          y: (Math.random() - 0.5) * canvasHeight * 1.1,
-          z: (Math.random() - 0.5) * 520,
-          seed: Math.random() * Math.PI * 2,
+    // ¿Está (x, y, z) dentro del cerebro? Coordenadas normalizadas ~[-1, 1].
+    const insideBrain = (x, y, z) => {
+      const cerebrum = (x * x) / 1.0 + ((y + 0.08) ** 2) / 0.52 + (z * z) / 0.62 <= 1 && y < 0.5 - 0.18 * x;
+      const cerebellum = ((x - 0.52) ** 2) / 0.09 + ((y - 0.5) ** 2) / 0.04 + (z * z) / 0.2 <= 1;
+      const stem = Math.abs(x - 0.22) < 0.09 && y > 0.3 && y < 0.95 && Math.abs(z) < 0.1;
+      const fissure = Math.abs(z) < 0.035 && y < 0.25; // separa los dos hemisferios
+      return (cerebrum || cerebellum || stem) && !fissure;
+    };
+
+    const build = () => {
+      nodes.length = 0;
+      pulses.length = 0;
+      const target = width < 700 ? 200 : 380;
+      let guard = 0;
+      while (nodes.length < target && guard < 40000) {
+        guard += 1;
+        const x = Math.random() * 2 - 1;
+        const y = Math.random() * 2 - 1;
+        const z = Math.random() * 2 - 1;
+        if (!insideBrain(x, y, z)) continue;
+        // Sesgo hacia la "corteza": más nodos cerca de la superficie
+        const shell = (x * x) + ((y + 0.08) ** 2) / 0.52 + (z * z) / 0.62;
+        if (shell < 0.62 && Math.random() < 0.85) continue;
+        nodes.push({ x, y, z, links: [], energy: 0, seed: Math.random() * Math.PI * 2, sx: 0, sy: 0, depth: 0 });
+      }
+      // Vecinos más cercanos (3D)
+      nodes.forEach((node, i) => {
+        const distances = [];
+        nodes.forEach((other, j) => {
+          if (i === j) return;
+          const d = (node.x - other.x) ** 2 + (node.y - other.y) ** 2 + (node.z - other.z) ** 2;
+          if (d < 0.06) distances.push([d, j]);
         });
-      }
+        distances.sort((a, b) => a[0] - b[0]);
+        node.links = distances.slice(0, 3).map(([, j]) => j);
+      });
     };
 
-    const resizeCanvas = () => {
+    const resize = () => {
       const ratio = Math.min(window.devicePixelRatio || 1, 2);
-      canvasWidth = heroSection.clientWidth;
-      canvasHeight = heroSection.clientHeight;
-      heroCanvas.width = Math.round(canvasWidth * ratio);
-      heroCanvas.height = Math.round(canvasHeight * ratio);
-      context.setTransform(ratio, 0, 0, ratio, 0, 0);
-      buildPoints();
+      width = heroSection.clientWidth;
+      height = heroSection.clientHeight;
+      heroCanvas.width = Math.round(width * ratio);
+      heroCanvas.height = Math.round(height * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      const wide = width >= 900;
+      cx = wide ? width * 0.7 : width * 0.5;
+      cy = wide ? height * 0.48 : height * 0.36;
+      scale = wide ? Math.min(width * 0.27, height * 0.55) : Math.min(width * 0.46, height * 0.3);
+      build();
     };
 
-    const drawField = (timestamp) => {
-      if (!visible) { frameId = 0; return; }
-      context.clearRect(0, 0, canvasWidth, canvasHeight);
-      const time = timestamp * 0.00013;
-      const projected = points.map((point) => {
-        const angle = time + point.seed * 0.16;
-        const cos = Math.cos(angle);
-        const sin = Math.sin(angle);
-        const rotatedX = point.x * cos - point.z * sin;
-        const rotatedZ = point.x * sin + point.z * cos;
-        const waveY = point.y + Math.sin(time * 10 + point.seed) * 12;
-        const scale = 430 / Math.max(240, 860 + rotatedZ);
-        return { x: canvasWidth / 2 + rotatedX * scale + pointerX * 26, y: canvasHeight / 2 + waveY * scale + pointerY * 18, scale };
-      });
+    const spawnPulse = (from) => {
+      const node = nodes[from];
+      if (!node || !node.links.length || pulses.length > 70) return;
+      const to = node.links[Math.floor(Math.random() * node.links.length)];
+      pulses.push({ from, to, t: 0, speed: 0.025 + Math.random() * 0.03, hops: 2 + Math.floor(Math.random() * 4) });
+    };
 
-      for (let i = 0; i < projected.length; i += 1) {
-        const current = projected[i];
-        for (let j = i + 1; j < projected.length; j += 1) {
-          const other = projected[j];
-          const dx = current.x - other.x;
-          const dy = current.y - other.y;
-          const distance = Math.hypot(dx, dy);
-          if (distance > 104) continue;
-          const alpha = (1 - distance / 104) * 0.17;
-          context.strokeStyle = `rgba(34, 211, 238, ${alpha})`;
-          context.lineWidth = 0.65;
-          context.beginPath(); context.moveTo(current.x, current.y); context.lineTo(other.x, other.y); context.stroke();
+    // Mezcla cian → violeta → magenta según la posición
+    const colorAt = (u, alpha) => {
+      const stops = [[34, 211, 238], [167, 139, 250], [232, 121, 249]];
+      const k = Math.min(Math.max(u, 0), 1) * 2;
+      const i = Math.min(Math.floor(k), 1);
+      const f = k - i;
+      const c = stops[i].map((v, n) => Math.round(v + (stops[i + 1][n] - v) * f));
+      return `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${alpha})`;
+    };
+
+    const draw = (time) => {
+      ctx.clearRect(0, 0, width, height);
+      const yaw = Math.sin(time * 0.00022) * 0.32;
+      const pitch = Math.sin(time * 0.00017) * 0.08 - 0.05;
+      const cosY = Math.cos(yaw); const sinY = Math.sin(yaw);
+      const cosP = Math.cos(pitch); const sinP = Math.sin(pitch);
+
+      // Proyección
+      nodes.forEach((n) => {
+        const breathe = 1 + Math.sin(time * 0.0012 + n.seed) * 0.008;
+        const x1 = (n.x * cosY - n.z * sinY) * breathe;
+        const z1 = n.x * sinY + n.z * cosY;
+        const y1 = n.y * cosP - z1 * sinP;
+        const z2 = n.y * sinP + z1 * cosP;
+        const persp = 2.6 / (2.6 + z2);
+        n.sx = cx + x1 * scale * persp;
+        n.sy = cy + y1 * scale * persp;
+        n.depth = (1 - z2) / 2; // 0 lejos → 1 cerca
+        n.persp = persp;
+        n.u = (x1 + 1) / 2;
+        if (pointer.active) {
+          const d = Math.hypot(n.sx - pointer.x, n.sy - pointer.y);
+          if (d < 90) n.energy = Math.min(1, n.energy + (1 - d / 90) * 0.12);
         }
-      }
-      projected.forEach((point) => {
-        const radius = Math.max(0.7, Math.min(2.2, point.scale * 2.7));
-        context.fillStyle = `rgba(103, 232, 249, ${Math.min(0.82, point.scale * 1.25)})`;
-        context.beginPath(); context.arc(point.x, point.y, radius, 0, Math.PI * 2); context.fill();
+        n.energy *= 0.955;
       });
-      frameId = window.requestAnimationFrame(drawField);
+
+      // Conexiones
+      ctx.lineWidth = 0.7;
+      nodes.forEach((n) => {
+        n.links.forEach((j) => {
+          const m = nodes[j];
+          if (j < 0) return;
+          const glow = Math.max(n.energy, m.energy);
+          const alpha = 0.05 + n.depth * 0.12 + glow * 0.5;
+          ctx.strokeStyle = colorAt(n.u, alpha);
+          ctx.beginPath(); ctx.moveTo(n.sx, n.sy); ctx.lineTo(m.sx, m.sy); ctx.stroke();
+        });
+      });
+
+      // Impulsos que viajan y se encadenan
+      for (let i = pulses.length - 1; i >= 0; i -= 1) {
+        const p = pulses[i];
+        p.t += p.speed;
+        const a = nodes[p.from]; const b = nodes[p.to];
+        if (p.t >= 1) {
+          b.energy = Math.min(1, b.energy + 0.6);
+          pulses.splice(i, 1);
+          if (p.hops > 0 && b.links.length) {
+            const next = b.links[Math.floor(Math.random() * b.links.length)];
+            if (next !== p.from) pulses.push({ from: p.to, to: next, t: 0, speed: p.speed, hops: p.hops - 1 });
+          }
+          continue;
+        }
+        const x = a.sx + (b.sx - a.sx) * p.t;
+        const y = a.sy + (b.sy - a.sy) * p.t;
+        const grad = ctx.createRadialGradient(x, y, 0, x, y, 9);
+        grad.addColorStop(0, colorAt(a.u, 0.95));
+        grad.addColorStop(1, colorAt(a.u, 0));
+        ctx.fillStyle = grad;
+        ctx.beginPath(); ctx.arc(x, y, 9, 0, Math.PI * 2); ctx.fill();
+      }
+
+      // Nodos
+      nodes.forEach((n) => {
+        const r = (0.8 + n.depth * 1.6 + n.energy * 2.4) * n.persp;
+        ctx.fillStyle = colorAt(n.u, 0.25 + n.depth * 0.55 + n.energy * 0.4);
+        ctx.beginPath(); ctx.arc(n.sx, n.sy, r, 0, Math.PI * 2); ctx.fill();
+        if (n.energy > 0.35) {
+          ctx.fillStyle = colorAt(n.u, n.energy * 0.18);
+          ctx.beginPath(); ctx.arc(n.sx, n.sy, r * 5, 0, Math.PI * 2); ctx.fill();
+        }
+      });
+
+      if (Math.random() < 0.22) spawnPulse(Math.floor(Math.random() * nodes.length));
+      if (pointer.active && Math.random() < 0.5) {
+        const near = nodes.findIndex((n) => Math.hypot(n.sx - pointer.x, n.sy - pointer.y) < 50);
+        if (near >= 0) spawnPulse(near);
+      }
+
+      if (!reducedMotion && visible) frameId = window.requestAnimationFrame(draw);
+      else frameId = 0;
     };
 
-    resizeCanvas();
-    frameId = window.requestAnimationFrame(drawField);
-    window.addEventListener('resize', resizeCanvas);
+    resize();
+    if (reducedMotion) draw(0);
+    else frameId = window.requestAnimationFrame(draw);
+
+    let resizeTimer = 0;
+    window.addEventListener('resize', () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => { resize(); if (reducedMotion) draw(0); }, 150);
+    });
+
     heroSection.addEventListener('pointermove', (event) => {
       const rect = heroSection.getBoundingClientRect();
-      pointerX = (event.clientX - rect.left) / rect.width - 0.5;
-      pointerY = (event.clientY - rect.top) / rect.height - 0.5;
+      pointer.x = event.clientX - rect.left;
+      pointer.y = event.clientY - rect.top;
+      pointer.active = true;
     });
-    heroSection.addEventListener('pointerleave', () => { pointerX = 0; pointerY = 0; });
-    if ('IntersectionObserver' in window) {
+    heroSection.addEventListener('pointerleave', () => { pointer.active = false; });
+
+    if ('IntersectionObserver' in window && !reducedMotion) {
       new IntersectionObserver(([entry]) => {
         visible = entry.isIntersecting;
-        if (visible && !frameId) frameId = window.requestAnimationFrame(drawField);
-      }, { threshold: 0.05 }).observe(heroSection);
+        if (visible && !frameId) frameId = window.requestAnimationFrame(draw);
+      }, { threshold: 0.02 }).observe(heroSection);
     }
   }
 
-  /* ---- 4. Preselección de servicio en el formulario ---------------------- */
+  /* ---- 6. Rotador de palabras del titular ------------------------------- */
+  const rotator = $('#rotator');
+  if (rotator) {
+    let index = 0;
+    let paused = false;
+    const showWord = () => { rotator.textContent = msg('words')[index % msg('words').length]; };
+    langListeners.push(showWord);
+    const hero = rotator.closest('h1');
+    hero.addEventListener('pointerenter', () => { paused = true; });
+    hero.addEventListener('pointerleave', () => { paused = false; });
+
+    if (!reducedMotion) {
+      window.setInterval(() => {
+        if (paused || document.hidden) return;
+        rotator.classList.add('is-out');
+        window.setTimeout(() => {
+          index += 1;
+          showWord();
+          rotator.classList.remove('is-out');
+        }, 350);
+      }, 2600);
+    }
+  }
+
+  /* ---- 7. Demo go / no-go ----------------------------------------------
+     12 ensayos (8 "go" cian, 4 "no-go" violeta) en orden aleatorio.
+     Mide tiempo de reacción en aciertos y errores de comisión (impulsos).   */
+  const stage = $('#lab-stage');
+  if (stage) {
+    const target = $('#lab-target');
+    const counter = $('#lab-counter');
+    const message = $('#lab-msg');
+    const results = $('#lab-results');
+    const live = $('#lab-live');
+    const TOTAL = 12;
+    const GO_COUNT = 8;
+
+    let state = 'idle'; // idle | running | done
+    let trials = [];
+    let current = -1;
+    let stimulusOn = false;
+    let shownAt = 0;
+    let responded = false;
+    let timer = 0;
+    let rts = [];
+    let commissions = 0;
+    let omissions = 0;
+
+    const pad = (n) => String(n).padStart(2, '0');
+    const flash = (kind) => {
+      stage.classList.remove('flash-ok', 'flash-bad');
+      void stage.offsetWidth; // reinicia la animación
+      stage.classList.add(kind);
+      window.setTimeout(() => stage.classList.remove(kind), 220);
+    };
+
+    const shuffle = (list) => {
+      for (let i = list.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [list[i], list[j]] = [list[j], list[i]];
+      }
+      return list;
+    };
+
+    const finish = () => {
+      state = 'done';
+      stage.classList.remove('is-running');
+      target.className = 'lab__target';
+      message.textContent = msg('labDone');
+      const mean = rts.length ? Math.round(rts.reduce((a, b) => a + b, 0) / rts.length) : null;
+      $('#res-rt').textContent = mean ? `${mean} ms` : '—';
+      $('#res-hits').textContent = `${rts.length} / ${GO_COUNT}`;
+      $('#res-imp').textContent = `${commissions} / ${TOTAL - GO_COUNT}`;
+      let verdict = 'labSteady';
+      if (omissions >= 3) verdict = 'labMissed';
+      else if (commissions >= 2) verdict = 'labImpulsive';
+      else if (mean && mean < 430) verdict = 'labFast';
+      $('#res-text').textContent = msg(verdict);
+      results.hidden = false;
+      live.textContent = `${msg('labDone')}. ${$('#res-rt').textContent}. ${msg(verdict)}`;
+    };
+
+    const nextTrial = () => {
+      current += 1;
+      if (current >= TOTAL) { finish(); return; }
+      counter.textContent = `${pad(current + 1)} / ${pad(TOTAL)}`;
+      target.className = 'lab__target';
+      stimulusOn = false;
+      responded = false;
+      const wait = 650 + Math.random() * 1100;
+      timer = window.setTimeout(() => {
+        const isGo = trials[current];
+        target.classList.add(isGo ? 'is-go' : 'is-nogo');
+        stimulusOn = true;
+        shownAt = performance.now();
+        timer = window.setTimeout(() => {
+          if (isGo && !responded) omissions += 1;
+          target.className = 'lab__target';
+          stimulusOn = false;
+          nextTrial();
+        }, isGo ? 850 : 1000);
+      }, wait);
+    };
+
+    const start = () => {
+      state = 'running';
+      trials = shuffle([...Array(GO_COUNT).fill(true), ...Array(TOTAL - GO_COUNT).fill(false)]);
+      current = -1;
+      rts = []; commissions = 0; omissions = 0;
+      results.hidden = true;
+      stage.classList.add('is-running');
+      live.textContent = msg('labGet');
+      nextTrial();
+    };
+
+    const respond = () => {
+      if (state !== 'running') return;
+      if (!stimulusOn) { flash('flash-bad'); return; } // anticipación
+      if (responded) return;
+      responded = true;
+      const isGo = trials[current];
+      if (isGo) {
+        rts.push(performance.now() - shownAt);
+        flash('flash-ok');
+      } else {
+        commissions += 1;
+        flash('flash-bad');
+      }
+      // Pasa al siguiente ensayo sin esperar el tiempo restante
+      window.clearTimeout(timer);
+      target.className = 'lab__target';
+      stimulusOn = false;
+      timer = window.setTimeout(nextTrial, 250);
+    };
+
+    stage.addEventListener('pointerdown', (event) => {
+      if (state === 'running') { event.preventDefault(); respond(); }
+    });
+    stage.addEventListener('click', () => { if (state !== 'running') start(); });
+    document.addEventListener('keydown', (event) => {
+      if (state !== 'running' || (event.code !== 'Space' && event.key !== ' ')) return;
+      event.preventDefault(); // evita que la página se desplace
+      if (!event.repeat) respond();
+    });
+    $('#lab-retry').addEventListener('click', () => { stage.focus(); start(); });
+  }
+
+  /* ---- 8. Preselección de servicio en el formulario ---------------------- */
   const serviceSelect = $('#servicio');
+  const LEGACY_SERVICES = { 'cognitivo-vr': 'neuro-salud', conocimiento: 'industria-vr' };
 
   if (serviceSelect) {
-    // Llegada desde otra página: /?servicio=sostenibilidad#contacto
-    const fromQuery = new URLSearchParams(location.search).get('servicio');
-    if (fromQuery && $(`option[value="${CSS.escape(fromQuery)}"]`, serviceSelect)) {
-      serviceSelect.value = fromQuery;
-    }
+    let fromQuery = new URLSearchParams(location.search).get('servicio');
+    if (fromQuery in LEGACY_SERVICES) fromQuery = LEGACY_SERVICES[fromQuery];
+    if (fromQuery && $(`option[value="${CSS.escape(fromQuery)}"]`, serviceSelect)) serviceSelect.value = fromQuery;
 
     $$('[data-service]').forEach((trigger) => {
       trigger.addEventListener('click', (event) => {
@@ -379,7 +656,7 @@
     });
   }
 
-  /* ---- 5. Formulario de contacto ---------------------------------------- */
+  /* ---- 9. Formulario de contacto ---------------------------------------- */
   const form = $('#contact-form');
 
   if (form) {
@@ -392,31 +669,22 @@
       field.setAttribute('aria-invalid', text ? 'true' : 'false');
       if (errorBox) errorBox.textContent = text;
     };
-
     const validateField = (field) => {
       if (field.validity.valid) { setError(field, ''); return true; }
       setError(field, field.validity.typeMismatch ? msg('email') : msg('required'));
       return false;
     };
-
     requiredFields.forEach((field) => {
       field.addEventListener('blur', () => validateField(field));
       field.addEventListener('input', () => { if (field.getAttribute('aria-invalid') === 'true') validateField(field); });
     });
-
-    const setStatus = (text, state = 'info') => {
-      status.textContent = text;
-      status.dataset.state = state;
-    };
+    const setStatus = (text, state = 'info') => { status.textContent = text; status.dataset.state = state; };
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-
-      // Valida todos los campos y lleva el foco al primero con error
       const invalid = requiredFields.filter((field) => !validateField(field));
       if (invalid.length) { invalid[0].focus(); return; }
-
-      if (form.elements.sitio_web.value) return; // campo trampa: un bot lo llenó
+      if (form.elements.sitio_web.value) return; // campo trampa: lo llenó un bot
 
       if (!CONFIG.formEndpoint) {
         const service = serviceSelect.selectedOptions[0].textContent;
@@ -428,9 +696,8 @@
           '',
           form.elements.mensaje.value,
         ].join('\n');
-        const subject = `Solicitud de contacto — ${service}`;
         setStatus(msg('mailto'));
-        window.location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent(`Solicitud de contacto — ${service}`)}&body=${encodeURIComponent(body)}`;
         return;
       }
 
@@ -449,7 +716,7 @@
     });
   }
 
-  /* ---- 6. Widget flotante unificado ------------------------------------- */
+  /* ---- 10. Widget flotante ---------------------------------------------- */
   const widgetToggle = $('#widget-toggle');
   const widgetPanel = $('#widget-panel');
 
@@ -459,30 +726,48 @@
       widgetToggle.setAttribute('aria-expanded', String(open));
       if (open) widgetPanel.focus();
     };
-
     widgetToggle.addEventListener('click', () => setWidget(widgetPanel.hidden));
     $('#widget-close').addEventListener('click', () => { setWidget(false); widgetToggle.focus(); });
     widgetPanel.addEventListener('click', (event) => { if (event.target.closest('a')) setWidget(false); });
 
     const widgetMessages = $('#widget-messages');
-    const topicContent = {
-      software: { label: 'Software e IA', service: 'software-ia', response: 'Podemos crear software a medida, automatizar tareas e integrar asistentes de IA para tu operación.' },
-      dmaic: { label: 'Mejoramiento DMAIC', service: 'dmaic-ia', response: 'Nuestro equipo combina DMAIC, analítica e IA para diagnosticar, implementar y medir mejoras.' },
-      inmersivo: { label: 'Realidad virtual', service: 'cognitivo-vr', response: 'Diseñamos experiencias inmersivas para capacitación, aprendizaje y desarrollo de habilidades.' },
+    const TOPICS = {
+      salud: {
+        service: 'neuro-salud',
+        es: ['Salud', 'Con NeuroAr Cognitivo evaluamos y entrenamos funciones cognitivas en realidad virtual, para neurorehabilitación, terapias y gimnasio mental.'],
+        en: ['Health', 'With NeuroAr Cognitive we assess and train cognitive functions in virtual reality for neurorehabilitation, therapy and brain fitness.'],
+      },
+      educacion: {
+        service: 'educacion',
+        es: ['Educación', 'Tenemos test vocacional, aulas en realidad virtual y programas de habilidades para colegios y universidades.'],
+        en: ['Education', 'We offer a career test, virtual reality classrooms and skills programs for schools and universities.'],
+      },
+      industria: {
+        service: 'industria-vr',
+        es: ['Empresa o industria', 'Entrenamos tareas críticas en realidad virtual y mejoramos procesos con DMAIC + IA y software a la medida.'],
+        en: ['Business or industry', 'We train critical tasks in virtual reality and improve processes with DMAIC + AI and custom software.'],
+      },
+    };
+    const bubble = (text, user) => {
+      const p = document.createElement('p');
+      p.className = user ? 'chat-bubble chat-bubble--user' : 'chat-bubble';
+      p.textContent = text;
+      return p;
     };
 
     $$('[data-widget-topic]').forEach((button) => {
       button.addEventListener('click', () => {
-        const topic = topicContent[button.dataset.widgetTopic];
+        const topic = TOPICS[button.dataset.widgetTopic];
         if (!topic || !widgetMessages) return;
+        const [label, response] = topic[lang];
         $$('.chat-widget__choices button').forEach((choice) => {
           choice.disabled = choice !== button;
           choice.setAttribute('aria-pressed', String(choice === button));
         });
-        widgetMessages.innerHTML = `<p class="chat-bubble chat-bubble--user">${topic.label}</p><p class="chat-bubble">${topic.response}</p>`;
+        widgetMessages.replaceChildren(bubble(label, true), bubble(response, false));
         if (serviceSelect) serviceSelect.value = topic.service;
         const whatsApp = $('#widget-whatsapp');
-        if (whatsApp) whatsApp.href = `https://wa.me/573003743575?text=${encodeURIComponent(`Hola, me interesa: ${topic.label}.`)}`;
+        if (whatsApp) whatsApp.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(`Hola, me interesa NeuroAr para: ${topic.es[0]}.`)}`;
       });
     });
     document.addEventListener('keydown', (event) => {
@@ -490,9 +775,9 @@
     });
   }
 
-  /* ---- 7. Scrollspy: marca el ítem de navegación de la sección visible --- */
-  const navLinks = $$('.nav-list a').filter((link) => link.hash && link.pathname === location.pathname);
-  const spied = navLinks
+  /* ---- 11. Scrollspy ---------------------------------------------------- */
+  const spied = $$('.nav-list a')
+    .filter((link) => link.hash && link.pathname === location.pathname)
     .map((link) => ({ link, target: document.querySelector(link.hash) }))
     .filter((item) => item.target);
 
@@ -509,33 +794,26 @@
     spied.forEach(({ target }) => observer.observe(target));
   }
 
-  /* ---- 8. Galería con lightbox (sostenibilidad) ------------------------- */
+  /* ---- 12. Galería con lightbox (sostenibilidad) ------------------------ */
   const lightbox = $('#lightbox');
-
   if (lightbox && typeof lightbox.showModal === 'function') {
     const lightboxImage = $('img', lightbox);
-
     $$('.gallery__item').forEach((button) => {
       button.addEventListener('click', () => {
         const thumb = $('img', button);
         lightboxImage.src = thumb.currentSrc || thumb.src;
-        lightboxImage.alt = thumb.alt; // el texto alternativo viaja con la imagen
+        lightboxImage.alt = thumb.alt;
         lightbox.showModal();
       });
     });
-
     lightbox.addEventListener('click', (event) => {
       if (event.target === lightbox || event.target.closest('[data-close]')) lightbox.close();
     });
   }
 
-  /* ---- 9. Aparición al desplazarse (reveal) ----------------------------
-     Se activa solo con JS y sin "reducir movimiento". Sin esto, todo el
-     contenido queda visible desde el inicio.                                */
-  const REVEAL_SELECTOR = '.section__head, .pillar, .tabs, .dmaic__step, .outcomes li, .ref, .city, .form, .card, .gallery li, .split > *, .contact > *';
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if ('IntersectionObserver' in window && !prefersReducedMotion) {
+  /* ---- 13. Aparición al desplazarse ------------------------------------- */
+  const REVEAL_SELECTOR = '.section__head, .loop__step, .uni, .green-band, .try__copy, .lab, .cogpanel, .sectors li, .dmaic__step, .ref, .city, .form, .card, .gallery li, .split > *, .contact > *';
+  if ('IntersectionObserver' in window && !reducedMotion) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
@@ -545,7 +823,7 @@
     }, { threshold: 0.12 });
 
     $$(REVEAL_SELECTOR).forEach((el) => {
-      // Escalonado: cada hermano espera 80 ms más que el anterior (máx. 400 ms)
+      if (el.closest('.reveal')) return; // evita animar dos veces lo anidado
       const siblings = [...el.parentElement.children].filter((child) => child.matches(REVEAL_SELECTOR));
       el.style.setProperty('--d', `${Math.min(siblings.indexOf(el), 5) * 80}ms`);
       el.classList.add('reveal');
@@ -553,16 +831,40 @@
     });
   }
 
-  /* ---- 10. Foco de luz bajo el cursor en las tarjetas -------------------- */
-  const SPOT_SELECTOR = '.pillar, .tab, .ref, .card, .city, .dmaic__step';
+  /* ---- 14. Foco de luz bajo el cursor ----------------------------------- */
+  const SPOT_SELECTOR = '.loop__step, .uni, .ref, .card, .city, .dmaic__step';
   $$(SPOT_SELECTOR).forEach((el) => el.classList.add('spot'));
-
   document.addEventListener('pointermove', (event) => {
-    if (event.pointerType !== 'mouse') return; // en táctil no hay cursor
+    if (event.pointerType !== 'mouse') return;
     const card = event.target.closest(SPOT_SELECTOR);
     if (!card) return;
     const rect = card.getBoundingClientRect();
     card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
     card.style.setProperty('--my', `${event.clientY - rect.top}px`);
   });
+
+  /* ---- 15. Imágenes que faltan en el hosting ----------------------------
+     Si una foto no existe, se oculta su contenedor en vez de mostrar el
+     icono roto. Si falta el logo, se muestra la marca en texto.             */
+  const handleMissing = (img) => {
+    const media = img.closest('.media');
+    if (media) { media.classList.add('is-missing'); return; }
+    if (img.closest('.brand, .site-footer__brand')) {
+      const text = document.createElement('span');
+      text.className = 'brand__text';
+      text.innerHTML = 'Neuro<b>Ar</b>';
+      img.replaceWith(text);
+      return;
+    }
+    img.style.visibility = 'hidden';
+  };
+  $$('img').forEach((img) => {
+    if (img.complete && img.naturalWidth === 0 && img.getAttribute('src')) handleMissing(img);
+    else img.addEventListener('error', () => handleMissing(img), { once: true });
+  });
+
+  /* ---- Idioma inicial (al final, cuando todos los oyentes existen) ------ */
+  let storedLang = 'es';
+  try { storedLang = localStorage.getItem('neuroar-lang') === 'en' ? 'en' : 'es'; } catch (_) { /* ignorar */ }
+  setLang(storedLang);
 })();
