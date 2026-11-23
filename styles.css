@@ -616,7 +616,7 @@ p { margin: 0 0 var(--s-2); }
   display: grid; align-items: center; min-height: 440px; padding-block: var(--s-10);
   background:
     linear-gradient(rgba(5, 7, 15, 0.78), rgba(5, 7, 15, 0.9)),
-    url("neuroAR2/img/sostenibilidad/hero-sostenibilidad.webp") center / cover no-repeat,
+    url("/neuroAR2/img/sostenibilidad/hero-sostenibilidad.webp") center / cover no-repeat,
     var(--bg);
 }
 .page-hero::before {
