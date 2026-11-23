@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NeuroAr | Software, inteligencia artificial y mejoramiento continuo</title>
-  <meta name="description" content="Software a medida, agentes de mejoramiento DMAIC con IA, plataformas de conocimiento y realidad virtual (NeuroAr Cognitivo) para empresas, instituciones y talento humano en Colombia.">
-  <meta name="theme-color" content="#070b14">
+  <title>NeuroAr | Neurotecnología: neurociencia, realidad virtual e IA</title>
+  <meta name="description" content="NeuroAr une neurociencia, realidad virtual e inteligencia artificial para evaluar, rehabilitar y potenciar la mente humana en salud, educación, industria y gobierno. Empresa colombiana de base tecnológica.">
+  <meta name="theme-color" content="#05070f">
   <link rel="canonical" href="https://neuroar.com.co/">
   <!-- TODO: confirmar la ruta real del favicon -->
   <link rel="icon" href="/favicon.ico">
@@ -13,14 +13,14 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CO">
   <meta property="og:site_name" content="NeuroAr">
-  <meta property="og:title" content="NeuroAr | Software, IA y mejoramiento continuo">
-  <meta property="og:description" content="Convertimos procesos en resultados medibles con software a medida, IA, DMAIC y realidad virtual.">
+  <meta property="og:title" content="NeuroAr | Tecnología para la mente humana">
+  <meta property="og:description" content="Neurociencia + realidad virtual + inteligencia artificial para evaluar, rehabilitar y potenciar capacidades cognitivas.">
   <meta property="og:url" content="https://neuroar.com.co/">
   <meta property="og:image" content="https://neuroar.com.co/neuroAR2/img/letra-neuroar.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="styles.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -32,7 +32,7 @@
   <header class="site-header">
     <div class="container site-header__inner">
       <a class="brand" href="#inicio" aria-label="NeuroAr, ir al inicio">
-        <img src="neuroAR2/img/logo-blanco-neuroar.png" alt="NeuroAr" width="140" height="32">
+        <img src="/neuroAR2/img/logo-blanco-neuroar.png" alt="NeuroAr" width="140" height="32">
       </a>
 
       <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -40,17 +40,12 @@
       </button>
 
       <nav class="site-nav" id="site-nav" aria-label="Principal" data-open="false">
-        <div class="nav-system" aria-hidden="true">
-          <span class="nav-system__ring">N</span>
-          <span><b>NEUROAR NAVIGATION</b><small>XR interface / ready</small></span>
-          <i></i>
-        </div>
         <ul class="nav-list">
+          <li><a href="#metodo" data-i18n="nav.method">Método</a></li>
           <li><a href="#soluciones" data-i18n="nav.solutions">Soluciones</a></li>
-          <li><a href="#dmaic" data-i18n="nav.dmaic">Metodología DMAIC</a></li>
-          <li><a href="#inmersivo" data-i18n="nav.cognitive">NeuroAr Cognitivo</a></li>
+          <li><a href="#pruebalo" data-i18n="nav.try">Pruébalo</a></li>
+          <li><a href="#sectores" data-i18n="nav.sectors">Sectores</a></li>
           <li><a href="#nosotros" data-i18n="nav.about">Nosotros</a></li>
-          <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
         </ul>
 
         <div class="nav-actions">
@@ -59,8 +54,8 @@
             <span class="lang-switch__sep" aria-hidden="true">|</span>
             <button type="button" data-lang="en" aria-pressed="false">EN</button>
           </div>
-          <a class="btn btn--outline btn--sm" href="https://app.neuroar.com.co/" data-i18n="nav.app">App NeuroAr</a>
-          <a class="btn btn--primary btn--sm" href="#contacto" data-i18n="cta.diagnosis">Solicitar diagnóstico</a>
+          <a class="btn btn--ghost btn--sm" href="https://app.neuroar.com.co/" data-i18n="nav.app">App NeuroAr</a>
+          <a class="btn btn--primary btn--sm" href="#contacto" data-i18n="cta.demo">Agenda una demo</a>
         </div>
       </nav>
     </div>
@@ -68,371 +63,317 @@
 
   <main id="contenido">
 
-    <!-- ======================= HERO ======================= -->
+    <!-- ======================= HERO =======================
+         Lienzo: red neuronal con forma de cerebro que "dispara" impulsos
+         y reacciona al cursor. Decorativo; el mensaje está en el texto.    -->
     <section class="hero" id="inicio" aria-labelledby="hero-title">
       <canvas class="hero__canvas" id="hero-canvas" aria-hidden="true"></canvas>
-      <div class="container hero__grid">
-        <div class="hero__copy">
-          <p class="eyebrow" data-i18n="hero.eyebrow">Software · Inteligencia artificial · Mejoramiento continuo</p>
-          <h1 id="hero-title" data-i18n="hero.title">Software, IA y mejoramiento continuo que convierten procesos en resultados medibles.</h1>
-          <p class="lead" data-i18n="hero.lead">NeuroAr desarrolla software a medida, agentes de mejoramiento con IA, plataformas de conocimiento y experiencias de realidad virtual para empresas, instituciones y talento humano.</p>
-          <div class="btn-row">
-            <a class="btn btn--primary" href="#contacto" data-service="dmaic-ia" data-i18n="cta.diagnosis">Solicitar diagnóstico</a>
-            <a class="btn btn--outline" href="#soluciones" data-i18n="cta.explore">Explorar soluciones</a>
-          </div>
-          <div class="hero__signals" aria-label="Capacidades destacadas">
-            <a href="#soluciones"><span aria-hidden="true">⌘</span> Software a medida</a>
-            <a href="#dmaic"><span aria-hidden="true">✦</span> IA + DMAIC</a>
-            <a href="#inmersivo"><span aria-hidden="true">◎</span> Experiencias inmersivas</a>
-          </div>
-          <dl class="hero__metrics" aria-label="Capacidades NeuroAr">
-            <div><dt>XR</dt><dd>Aprendizaje inmersivo</dd></div>
-            <div><dt>IA</dt><dd>Procesos aumentados</dd></div>
-            <div><dt>DATA</dt><dd>Resultados medibles</dd></div>
-          </dl>
+      <div class="hero__veil" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+        <p class="hero__tag"><span class="pulse-dot" aria-hidden="true"></span> <span data-i18n="hero.tag">Neurotecnología hecha en Colombia</span></p>
+
+        <h1 id="hero-title" class="hero__title">
+          <span class="hero__line" data-i18n="hero.title.a">Tecnología para</span>
+          <span class="hero__line" data-i18n="hero.title.b">la mente que</span>
+          <span class="hero__line hero__rotator" aria-hidden="true"><span class="rotator" id="rotator">aprende.</span></span>
+          <span class="visually-hidden" data-i18n="hero.title.sr">aprende, se recupera, elige su futuro, trabaja segura y decide con datos.</span>
+        </h1>
+
+        <p class="hero__lead" data-i18n="hero.lead">Unimos <strong>neurociencia</strong>, <strong>realidad virtual</strong> e <strong>inteligencia artificial</strong> para evaluar, rehabilitar y potenciar las capacidades humanas, en clínicas, colegios, empresas, industria y gobierno.</p>
+
+        <div class="btn-row">
+          <a class="btn btn--primary btn--lg" href="#pruebalo" data-i18n="cta.try">Pon a prueba tu mente</a>
+          <a class="btn btn--outline btn--lg" href="#contacto" data-i18n="cta.demo">Agenda una demo</a>
         </div>
 
-        <!-- Red de capacidades: decorativa (el texto equivalente ya está en el hero y los pilares) -->
-        <div class="hero__visual" aria-hidden="true">
-          <div class="hero__hud hero__hud--top"><span>NEUROAR / XR</span><b>01.24</b></div>
-          <span class="hero__orb hero__orb--one"></span><span class="hero__orb hero__orb--two"></span>
-          <svg viewBox="0 0 480 420" fill="none" focusable="false">
-            <circle class="net__ring" cx="240" cy="210" r="150"/>
-
-            <g class="net__links">
-              <line class="net__link" x1="240" y1="210" x2="240" y2="60"/>
-              <line class="net__link" x1="240" y1="210" x2="383" y2="164"/>
-              <line class="net__link" x1="240" y1="210" x2="328" y2="331"/>
-              <line class="net__link" x1="240" y1="210" x2="152" y2="331"/>
-              <line class="net__link" x1="240" y1="210" x2="97" y2="164"/>
-            </g>
-
-            <g>
-              <circle class="net__halo" cx="240" cy="60" r="22"/>
-              <circle class="net__halo" cx="383" cy="164" r="22"/>
-              <circle class="net__halo" cx="328" cy="331" r="22"/>
-              <circle class="net__halo" cx="152" cy="331" r="22"/>
-              <circle class="net__halo" cx="97" cy="164" r="22"/>
-            </g>
-
-            <g>
-              <circle class="net__node" cx="240" cy="60" r="22"/>
-              <circle class="net__node" cx="383" cy="164" r="22"/>
-              <circle class="net__node" cx="328" cy="331" r="22"/>
-              <circle class="net__node" cx="152" cy="331" r="22"/>
-              <circle class="net__node" cx="97" cy="164" r="22"/>
-              <circle class="net__core" cx="240" cy="60" r="5"/>
-              <circle class="net__core" cx="383" cy="164" r="5"/>
-              <circle class="net__core" cx="328" cy="331" r="5"/>
-              <circle class="net__core" cx="152" cy="331" r="5"/>
-              <circle class="net__core" cx="97" cy="164" r="5"/>
-            </g>
-
-            <circle class="net__core" cx="240" cy="210" r="34"/>
-            <text class="net__core-text" x="240" y="215">NeuroAr</text>
-
-            <text class="net__label" x="240" y="24">SOFTWARE</text>
-            <text class="net__label" x="383" y="206">IA</text>
-            <text class="net__label" x="328" y="373">DMAIC</text>
-            <text class="net__label" x="152" y="373">VR</text>
-            <text class="net__label" x="97" y="206">SOSTENIBILIDAD</text>
-          </svg>
-          <div class="hero__hud hero__hud--bottom"><span>IMMERSIVE SYSTEM</span><i></i><span>ONLINE</span></div>
-        </div>
+        <ul class="hero__equation" aria-label="La fórmula NeuroAr">
+          <li><b>Neuro</b><span data-i18n="hero.eq.1">ciencia</span></li>
+          <li class="op" aria-hidden="true">+</li>
+          <li><b>AR</b><span data-i18n="hero.eq.2">realidad extendida</span></li>
+          <li class="op" aria-hidden="true">+</li>
+          <li><b>IA</b><span data-i18n="hero.eq.3">analítica predictiva</span></li>
+          <li class="op" aria-hidden="true">=</li>
+          <li class="eq-result"><b>NeuroAr</b></li>
+        </ul>
       </div>
+
+      <a class="hero__scroll" href="#metodo" aria-label="Bajar a la siguiente sección"><span></span></a>
     </section>
 
-    <section class="experience-deck" aria-labelledby="deck-title">
-      <div class="container experience-deck__grid">
-        <div class="experience-deck__intro">
-          <p class="eyebrow">NeuroAr / Mission control</p>
-          <h2 id="deck-title">Tecnología que se explora, se entiende y se activa.</h2>
-          <p>Selecciona una capacidad para entrar directamente a su ecosistema. Cada ruta conecta tecnología, personas y resultados medibles.</p>
-          <div class="experience-deck__telemetry" aria-label="Estado del ecosistema">
-            <span><i></i> Sistemas conectados</span><span>XR + IA + DATOS</span>
-          </div>
-        </div>
-        <div class="experience-deck__console" aria-label="Explorador de capacidades">
-          <div class="console__header"><span>CAPABILITY MATRIX</span><span>LIVE</span></div>
-          <a class="console-card console-card--active" href="#soluciones" data-deck-focus="0"><b>01</b><span class="console-card__icon" aria-hidden="true">⌘</span><span><strong>Software + IA</strong><small>Automatización, datos y decisiones</small></span><em aria-hidden="true">↗</em></a>
-          <a class="console-card" href="#soluciones" data-deck-focus="1"><b>02</b><span class="console-card__icon" aria-hidden="true">◌</span><span><strong>DMAIC inteligente</strong><small>Mejoras sostenibles y medibles</small></span><em aria-hidden="true">↗</em></a>
-          <a class="console-card" href="#soluciones" data-deck-focus="3"><b>03</b><span class="console-card__icon" aria-hidden="true">◎</span><span><strong>NeuroAr Cognitivo</strong><small>Realidad virtual y aprendizaje</small></span><em aria-hidden="true">↗</em></a>
-          <div class="console__radar" aria-hidden="true"><span></span><i></i><i></i><i></i></div>
-        </div>
+    <!-- ======================= MARQUESINA ======================= -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Neurociencia</span><i>✦</i><span>Realidad virtual</span><i>✦</i><span>Inteligencia artificial</span><i>✦</i><span>Analítica predictiva</span><i>✦</i><span>Neurorehabilitación</span><i>✦</i><span>Orientación vocacional</span><i>✦</i><span>Software a medida</span><i>✦</i>
+        <span>Neurociencia</span><i>✦</i><span>Realidad virtual</span><i>✦</i><span>Inteligencia artificial</span><i>✦</i><span>Analítica predictiva</span><i>✦</i><span>Neurorehabilitación</span><i>✦</i><span>Orientación vocacional</span><i>✦</i><span>Software a medida</span><i>✦</i>
       </div>
-    </section>
+    </div>
 
-    <!-- ======================= ECOSISTEMA: 3 PILARES ======================= -->
-    <section class="section" aria-label="Ecosistema NeuroAr" style="padding-top:0">
+    <!-- ======================= MÉTODO: SUMERGIR · MEDIR · PREDECIR · POTENCIAR ======================= -->
+    <section class="section" id="metodo" aria-labelledby="method-title">
       <div class="container">
-        <ul class="pillars">
-          <li class="pillar">
-            <span class="pillar__num" aria-hidden="true">01</span>
-            <h3 data-i18n="pillar.1.title">Software, IA y DMAIC para empresas</h3>
-            <p data-i18n="pillar.1.text">Software a medida, inteligencia artificial y agentes de mejoramiento continuo para organizaciones de cualquier sector.</p>
+        <div class="section__head section__head--wide">
+          <p class="eyebrow" data-i18n="method.eyebrow">El método NeuroAr</p>
+          <h2 id="method-title"><span data-i18n="method.title.a">La realidad virtual no es el espectáculo.</span> <span class="grad" data-i18n="method.title.b">Es el instrumento de medición.</span></h2>
+          <p class="lead" data-i18n="method.lead">Cada experiencia inmersiva que diseñamos genera datos sobre cómo una persona atiende, recuerda, decide y reacciona. La IA convierte esos datos en decisiones.</p>
+        </div>
+
+        <ol class="loop">
+          <li class="loop__step">
+            <span class="loop__num">01</span>
+            <span class="loop__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="15" width="38" height="18" rx="7"/><circle cx="17" cy="24" r="4"/><circle cx="31" cy="24" r="4"/></svg>
+            </span>
+            <h3 data-i18n="method.1.t">Sumergir</h3>
+            <p data-i18n="method.1.p">Escenarios de realidad virtual controlados y seguros: tareas cognitivas, simulaciones laborales o situaciones de la vida diaria.</p>
           </li>
-          <li class="pillar">
-            <span class="pillar__num" aria-hidden="true">02</span>
-            <h3 data-i18n="pillar.2.title">Conocimiento y NeuroAr Cognitivo</h3>
-            <p data-i18n="pillar.2.text">Plataformas de conocimiento y realidad virtual para talento humano, educación y salud.</p>
+          <li class="loop__step">
+            <span class="loop__num">02</span>
+            <span class="loop__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26h8l4-12 7 22 6-16 4 6h11"/></svg>
+            </span>
+            <h3 data-i18n="method.2.t">Medir</h3>
+            <p data-i18n="method.2.p">Atención, memoria, tiempo de reacción, funciones ejecutivas y desempeño en la tarea, registrados de forma objetiva.</p>
           </li>
-          <li class="pillar">
-            <span class="pillar__num" aria-hidden="true">03</span>
-            <h3 data-i18n="pillar.3.title">Sostenibilidad ambiental</h3>
-            <p data-i18n="pillar.3.text">Soluciones tecnológicas para el uso eficiente de recursos y la conciencia ambiental.</p>
+          <li class="loop__step">
+            <span class="loop__num">03</span>
+            <span class="loop__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="34" r="3"/><circle cx="24" cy="14" r="3"/><circle cx="36" cy="28" r="3"/><path d="M14 31.5 22 16.5M26.5 16l7.5 10M6 42h36"/></svg>
+            </span>
+            <h3 data-i18n="method.3.t">Predecir</h3>
+            <p data-i18n="method.3.p">Inteligencia artificial y analítica predictiva para detectar patrones, riesgos y oportunidades en cada perfil o equipo.</p>
           </li>
+          <li class="loop__step">
+            <span class="loop__num">04</span>
+            <span class="loop__icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v8M24 34v8M6 24h8M34 24h8"/><circle cx="24" cy="24" r="7"/></svg>
+            </span>
+            <h3 data-i18n="method.4.t">Potenciar</h3>
+            <p data-i18n="method.4.p">Planes de entrenamiento, rehabilitación o mejora que se ajustan con cada sesión, y resultados que se pueden demostrar.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ======================= SOLUCIONES: 4 UNIVERSOS ======================= -->
+    <section class="section section--soft" id="soluciones" aria-labelledby="sol-title">
+      <div class="container">
+        <div class="section__head section__head--wide">
+          <p class="eyebrow" data-i18n="sol.eyebrow">Lo que hacemos</p>
+          <h2 id="sol-title" data-i18n="sol.title">Un mismo núcleo tecnológico, cuatro formas de transformar personas y organizaciones.</h2>
+        </div>
+
+        <div class="bento">
+          <!-- Salud -->
+          <article class="uni uni--health" id="salud">
+            <div class="uni__head">
+              <span class="uni__chip">01 · <span data-i18n="uni.1.chip">Salud</span></span>
+              <h3 data-i18n="uni.1.t">Neurorehabilitación y salud cognitiva</h3>
+            </div>
+            <p data-i18n="uni.1.p">Herramientas en realidad virtual para profesionales de la salud: evaluar, estimular y hacer seguimiento a las funciones cognitivas de sus pacientes.</p>
+            <ul class="tags">
+              <li>Evaluación neuropsicológica</li>
+              <li>Terapias cognitivas en VR</li>
+              <li>Neurorehabilitación</li>
+              <li>Gimnasio mental</li>
+            </ul>
+            <a class="uni__cta" href="#contacto" data-service="neuro-salud"><span data-i18n="cta.talk">Hablemos de esto</span> <span aria-hidden="true">→</span></a>
+            <svg class="uni__art" viewBox="0 0 600 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 H120 L135 66 L150 74 L165 70 H210 L222 30 L236 104 L250 52 L262 78 L272 70 H340 L352 62 L364 76 L376 70 H430 L442 22 L456 112 L470 46 L482 80 L492 70 H600" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          </article>
+
+          <!-- Educación -->
+          <article class="uni uni--edu" id="educacion">
+            <div class="uni__head">
+              <span class="uni__chip">02 · <span data-i18n="uni.2.chip">Educación</span></span>
+              <h3 data-i18n="uni.2.t">Orientación vocacional y aprendizaje inmersivo</h3>
+            </div>
+            <p data-i18n="uni.2.p">Ayudamos a estudiantes a descubrir su vocación con evidencia, y a colegios y universidades a enseñar con experiencias que se viven.</p>
+            <ul class="tags">
+              <li>Test vocacional</li>
+              <li>Aulas en realidad virtual</li>
+              <li>Habilidades socioemocionales</li>
+            </ul>
+            <div class="uni__links">
+              <a class="uni__cta" href="https://testvocacional.neuroar.com.co/" target="_blank" rel="noopener noreferrer"><span data-i18n="uni.2.test">Hacer el test vocacional</span> <span aria-hidden="true">↗</span><span class="visually-hidden">(se abre en una pestaña nueva)</span></a>
+              <a class="uni__cta uni__cta--quiet" href="#contacto" data-service="educacion"><span data-i18n="cta.talk">Hablemos de esto</span> <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Industria -->
+          <article class="uni uni--industry" id="industria">
+            <div class="uni__head">
+              <span class="uni__chip">03 · <span data-i18n="uni.3.chip">Industria y empresa</span></span>
+              <h3 data-i18n="uni.3.t">Entrenamiento inmersivo y mejoramiento continuo</h3>
+            </div>
+            <p data-i18n="uni.3.p">Simulamos tareas críticas y de alto riesgo para entrenar sin exponer a nadie, y combinamos Lean Six Sigma con IA para mejorar procesos con resultados medibles.</p>
+            <ul class="tags">
+              <li>Capacitación VR en SST</li>
+              <li>Agentes de mejoramiento DMAIC + IA</li>
+              <li>Plataformas de conocimiento</li>
+            </ul>
+            <div class="uni__links">
+              <a class="uni__cta" href="#contacto" data-service="industria-vr"><span data-i18n="cta.talk">Hablemos de esto</span> <span aria-hidden="true">→</span></a>
+              <a class="uni__cta uni__cta--quiet" href="#dmaic"><span data-i18n="uni.3.dmaic">Ver método DMAIC + IA</span> <span aria-hidden="true">↓</span></a>
+            </div>
+          </article>
+
+          <!-- Software -->
+          <article class="uni uni--soft" id="software">
+            <div class="uni__head">
+              <span class="uni__chip">04 · <span data-i18n="uni.4.chip">Software e IA</span></span>
+              <h3 data-i18n="uni.4.t">Software a medida y analítica predictiva</h3>
+            </div>
+            <p data-i18n="uni.4.p">Aplicaciones, plataformas y asistentes de IA construidos sobre tus datos para automatizar tareas y anticipar decisiones.</p>
+            <ul class="tags">
+              <li>Aplicaciones web</li>
+              <li>Asistentes de IA</li>
+              <li>Analítica predictiva</li>
+              <li>Automatización</li>
+            </ul>
+            <a class="uni__cta" href="#contacto" data-service="software-ia"><span data-i18n="cta.talk">Hablemos de esto</span> <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+
+        <a class="green-band" href="sostenibilidad">
+          <span class="green-band__icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 25c0-11 7-18 19-18 0 12-7 19-18 19"/><path d="M7 25 18 14"/></svg>
+          </span>
+          <span><strong data-i18n="green.t">NeuroAr Sostenibilidad</strong> <span data-i18n="green.p">Realidad virtual para la conciencia ambiental y el uso eficiente de los recursos.</span></span>
+          <span class="green-band__go" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ======================= PRUÉBALO: DEMO GO / NO-GO ======================= -->
+    <section class="section try" id="pruebalo" aria-labelledby="try-title">
+      <div class="container try__grid">
+        <div class="try__copy">
+          <p class="eyebrow" data-i18n="try.eyebrow">Pruébalo ahora · 30 segundos</p>
+          <h2 id="try-title" data-i18n="try.title">¿Qué tan rápido decide tu cerebro?</h2>
+          <p class="lead" data-i18n="try.lead">Esta es una versión mínima de una tarea clásica de neurociencia (go / no-go) que mide atención e inhibición de impulsos.</p>
+          <ol class="try__rules">
+            <li><span class="dot dot--go" aria-hidden="true"></span> <span data-i18n="try.rule.1">Si aparece un círculo <b>cian</b>, toca o pulsa la barra espaciadora lo más rápido que puedas.</span></li>
+            <li><span class="dot dot--nogo" aria-hidden="true"></span> <span data-i18n="try.rule.2">Si aparece <b>violeta</b>, no hagas nada.</span></li>
+          </ol>
+          <p class="note" data-i18n="try.note">Demostración lúdica: no es una evaluación clínica ni guarda datos. En NeuroAr Cognitivo medimos esto y mucho más, en realidad virtual y con protocolos profesionales.</p>
+        </div>
+
+        <div class="lab" id="lab">
+          <div class="lab__hud" aria-hidden="true">
+            <span>NEUROAR LAB</span>
+            <span id="lab-counter">00 / 12</span>
+          </div>
+          <button class="lab__stage" id="lab-stage" type="button" aria-describedby="lab-live">
+            <span class="lab__target" id="lab-target" aria-hidden="true"></span>
+            <span class="lab__msg" id="lab-msg" data-i18n="try.start">Toca aquí para empezar</span>
+          </button>
+          <div class="lab__results" id="lab-results" hidden>
+            <dl>
+              <div><dt data-i18n="try.r.rt">Reacción media</dt><dd id="res-rt">—</dd></div>
+              <div><dt data-i18n="try.r.hits">Aciertos</dt><dd id="res-hits">—</dd></div>
+              <div><dt data-i18n="try.r.imp">Impulsos no frenados</dt><dd id="res-imp">—</dd></div>
+            </dl>
+            <p id="res-text"></p>
+            <div class="btn-row">
+              <button class="btn btn--outline btn--sm" id="lab-retry" type="button" data-i18n="try.retry">Intentar de nuevo</button>
+              <a class="btn btn--primary btn--sm" href="#contacto" data-service="neuro-salud" data-i18n="try.cta">Quiero esto en mi organización</a>
+            </div>
+          </div>
+          <p class="visually-hidden" id="lab-live" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= NEUROAR COGNITIVO ======================= -->
+    <section class="section section--soft" id="inmersivo" aria-labelledby="cog-title">
+      <div class="container split">
+        <div>
+          <p class="eyebrow" data-i18n="cog.eyebrow">Producto · NeuroAr Cognitivo</p>
+          <h2 id="cog-title" data-i18n="cog.title">Un laboratorio de neurociencia que cabe en unas gafas.</h2>
+          <p class="lead" data-i18n="cog.lead">Pruebas y entrenamiento cognitivo en realidad virtual, con resultados que el profesional consulta desde la app de NeuroAr.</p>
+          <ul class="checklist">
+            <li data-i18n="cog.l1">Pruebas cognitivas inmersivas, estandarizadas y repetibles</li>
+            <li data-i18n="cog.l2">Compatible con Meta Quest 2, 3 y 3S</li>
+            <li data-i18n="cog.l3">Resultados y seguimiento en app.neuroar.com.co</li>
+            <li data-i18n="cog.l4">Para salud, educación y talento humano</li>
+          </ul>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="#contacto" data-service="neuro-salud" data-i18n="cta.demo">Agenda una demo</a>
+            <a class="btn btn--outline" href="https://app.neuroar.com.co/" data-i18n="cog.app">Ir a la app</a>
+            <!-- TODO: subir el brochure de NeuroAr Cognitivo con este nombre (o ajustar la ruta) -->
+            <a class="btn btn--ghost" href="/neuroAR2/img/pdf/brochure-neuroar-cognitivo.pdf" download data-i18n="cog.brochure">Descargar brochure</a>
+          </div>
+        </div>
+
+        <!-- Panel ilustrativo (no son datos reales). La foto, si existe en el hosting, va de fondo. -->
+        <div class="cogpanel" aria-hidden="true">
+          <picture class="cogpanel__photo media">
+            <source srcset="/neuroAR2/img/realidad-virtual-gafas.webp" type="image/webp">
+            <img src="/neuroAR2/img/Gafas_2.jpg" alt="" width="640" height="480" loading="lazy" decoding="async">
+          </picture>
+          <div class="cogpanel__ui">
+            <div class="cogpanel__bar"><span>SESIÓN 07 · ATENCIÓN SOSTENIDA</span><b>● REC</b></div>
+            <div class="cogpanel__metrics">
+              <div><small>Atención</small><strong>86</strong><i style="--v:86%"></i></div>
+              <div><small>Memoria de trabajo</small><strong>72</strong><i style="--v:72%"></i></div>
+              <div><small>Velocidad</small><strong>91</strong><i style="--v:91%"></i></div>
+              <div><small>Control inhibitorio</small><strong>78</strong><i style="--v:78%"></i></div>
+            </div>
+            <svg class="cogpanel__chart" viewBox="0 0 300 80" preserveAspectRatio="none"><path d="M0 62 L30 58 L60 60 L90 50 L120 52 L150 40 L180 42 L210 30 L240 33 L270 22 L300 18" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+            <p class="cogpanel__foot">Vista ilustrativa · evolución entre sesiones</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= SECTORES ======================= -->
+    <section class="section" id="sectores" aria-labelledby="sec-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow" data-i18n="sec.eyebrow">Dónde trabajamos</p>
+          <h2 id="sec-title" data-i18n="sec.title">Seis sectores, un mismo propósito: personas más capaces.</h2>
+        </div>
+        <ul class="sectors">
+          <li><span class="sectors__n">/01</span><strong data-i18n="sec.1.t">Salud</strong><span data-i18n="sec.1.p">Clínicas, IPS y profesionales de la rehabilitación.</span></li>
+          <li><span class="sectors__n">/02</span><strong data-i18n="sec.2.t">Educación</strong><span data-i18n="sec.2.p">Colegios y universidades que enseñan y orientan distinto.</span></li>
+          <li><span class="sectors__n">/03</span><strong data-i18n="sec.3.t">Minería e industria</strong><span data-i18n="sec.3.p">Formación técnica, seguridad y productividad.</span></li>
+          <li><span class="sectors__n">/04</span><strong data-i18n="sec.4.t">Empresas</strong><span data-i18n="sec.4.p">Talento humano, conocimiento y procesos.</span></li>
+          <li><span class="sectors__n">/05</span><strong data-i18n="sec.5.t">Gobierno</strong><span data-i18n="sec.5.p">Programas públicos de innovación y bienestar.</span></li>
+          <li><span class="sectors__n">/06</span><strong data-i18n="sec.6.t">Fundaciones</strong><span data-i18n="sec.6.p">Proyectos sociales con impacto medible.</span></li>
         </ul>
       </div>
     </section>
 
-    <!-- ======================= SOLUCIONES (TABS) =======================
-         Fusiona "Qué hacemos" + "Explora nuestras capacidades".
-         #conocimiento es el id del panel 3 (ancla de compatibilidad).        -->
-    <section class="section section--soft" id="soluciones" aria-labelledby="sol-title">
+    <!-- ======================= DMAIC + IA (empresa e industria) ======================= -->
+    <section class="section section--soft" id="mejoramiento" aria-labelledby="mej-title">
       <div class="container">
-        <div class="section__head">
-          <p class="eyebrow" data-i18n="sol.eyebrow">Qué hacemos</p>
-          <h2 id="sol-title" data-i18n="sol.title">Soluciones que evolucionan contigo</h2>
-          <p class="lead" data-i18n="sol.lead">Elige un servicio para ver su alcance y entregables clave, y solicita una propuesta para tu organización.</p>
+        <div class="section__head section__head--wide" id="dmaic">
+          <p class="eyebrow" data-i18n="dmaic.eyebrow">Para empresa e industria · Lean Six Sigma + IA</p>
+          <h2 id="mej-title" data-i18n="dmaic.title">Agentes de mejoramiento: de los desafíos a resultados medibles.</h2>
+          <p class="lead" data-i18n="dmaic.lead">Un equipo externo que combina DMAIC, inteligencia artificial y desarrollo a la medida para diagnosticar, implementar y sostener mejoras, sin ampliar de forma permanente tu planta de ingeniería.</p>
         </div>
 
-        <div class="tabs">
-          <div class="tablist" role="tablist" aria-label="Soluciones de NeuroAr" aria-orientation="vertical">
-            <button class="tab" role="tab" id="tab-1" type="button" aria-selected="true" aria-controls="panel-software-ia"><span class="tab__num" aria-hidden="true">1</span><span data-i18n="tab.1">Software a medida e IA</span></button>
-            <button class="tab" role="tab" id="tab-2" type="button" aria-selected="false" aria-controls="panel-dmaic-ia" tabindex="-1"><span class="tab__num" aria-hidden="true">2</span><span data-i18n="tab.2">Agentes de Mejoramiento DMAIC + IA</span></button>
-            <button class="tab" role="tab" id="tab-3" type="button" aria-selected="false" aria-controls="conocimiento" tabindex="-1"><span class="tab__num" aria-hidden="true">3</span><span data-i18n="tab.3">Plataformas de Conocimiento Empresarial</span></button>
-            <button class="tab" role="tab" id="tab-4" type="button" aria-selected="false" aria-controls="panel-cognitivo" tabindex="-1"><span class="tab__num" aria-hidden="true">4</span><span data-i18n="tab.4">Realidad Virtual y NeuroAr Cognitivo</span></button>
-            <button class="tab" role="tab" id="tab-5" type="button" aria-selected="false" aria-controls="panel-sostenibilidad" tabindex="-1"><span class="tab__num" aria-hidden="true">5</span><span data-i18n="tab.5">Tecnología Industrial y Sostenibilidad</span></button>
-          </div>
-
-          <div class="tabpanels">
-            <!-- 1 -->
-            <div class="tabpanel" role="tabpanel" id="panel-software-ia" aria-labelledby="tab-1" tabindex="0">
-              <div>
-                <h3>Software a medida e inteligencia artificial</h3>
-                <p>Aplicaciones web, sistemas de información, automatización de flujos e integración de datos, con asistentes de IA, clasificación documental y analítica orientados a problemas reales.</p>
-                <ul class="checklist">
-                  <li>Aplicaciones web y sistemas de información</li>
-                  <li>Automatización de flujos e integración de herramientas</li>
-                  <li>Asistentes de conocimiento y analítica de datos</li>
-                  <li>Apoyo a la toma de decisiones</li>
-                </ul>
-                <a class="btn btn--primary" href="#contacto" data-service="software-ia" data-i18n="cta.consult">Consultar este servicio</a>
-              </div>
-              <div class="visual" aria-hidden="true">
-                <svg viewBox="0 0 160 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
-                  <rect x="10" y="14" width="140" height="92" rx="8"/>
-                  <path d="M10 34h140"/>
-                  <circle cx="24" cy="24" r="2.5" fill="currentColor" stroke="none"/>
-                  <circle cx="34" cy="24" r="2.5" fill="currentColor" stroke="none"/>
-                  <path d="M30 54h50M30 70h80M30 86h36"/>
-                </svg>
-              </div>
-            </div>
-
-            <!-- 2 -->
-            <div class="tabpanel" role="tabpanel" id="panel-dmaic-ia" aria-labelledby="tab-2" tabindex="0">
-              <div>
-                <h3>Agentes de Mejoramiento DMAIC + IA</h3>
-                <p>Un equipo externo que combina Lean Six Sigma, inteligencia artificial y desarrollo a la medida para diagnosticar, implementar mejoras y medir resultados, sin ampliar de forma permanente tu equipo de ingeniería.</p>
-                <ul class="checklist">
-                  <li>Diagnóstico y línea base con datos confiables</li>
-                  <li>Soluciones diseñadas e implementadas a la medida</li>
-                  <li>Indicadores de costos, productividad y confiabilidad</li>
-                  <li>Seguimiento y control para sostener las mejoras</li>
-                </ul>
-                <div class="btn-row">
-                  <a class="btn btn--primary" href="#contacto" data-service="dmaic-ia" data-i18n="cta.consult">Consultar este servicio</a>
-                  <a class="btn btn--outline" href="#dmaic">Ver metodología</a>
-                </div>
-              </div>
-              <div class="visual" aria-hidden="true">
-                <svg viewBox="0 0 160 120" fill="none" stroke="currentColor" stroke-width="3">
-                  <circle cx="80" cy="60" r="38"/>
-                  <g fill="currentColor" stroke="none">
-                    <circle cx="80" cy="22" r="6"/><circle cx="116.1" cy="48.3" r="6"/><circle cx="102.3" cy="90.7" r="6"/>
-                    <circle cx="57.7" cy="90.7" r="6"/><circle cx="43.9" cy="48.3" r="6"/>
-                  </g>
-                </svg>
-              </div>
-            </div>
-
-            <!-- 3 · id="conocimiento" -->
-            <div class="tabpanel" role="tabpanel" id="conocimiento" aria-labelledby="tab-3" tabindex="0">
-              <div>
-                <h3>Plataformas de Conocimiento Empresarial</h3>
-                <p>Diseñamos y administramos entornos digitales para organizar la formación, compartir conocimiento técnico y dar seguimiento al desarrollo de competencias.</p>
-                <ul class="checklist">
-                  <li>Capacitación y formación de trabajadores y contratistas</li>
-                  <li>Procedimientos, lecciones aprendidas y recursos técnicos</li>
-                  <li>Evaluaciones, seguimiento e indicadores</li>
-                  <li>Integración con herramientas digitales y asistentes de IA</li>
-                </ul>
-                <a class="btn btn--primary" href="#contacto" data-service="conocimiento" data-i18n="cta.consult">Consultar este servicio</a>
-              </div>
-              <div class="visual">
-                <picture>
-                  <source srcset="neuroAR2/img/conocimiento-empresarial.webp" type="image/webp">
-                  <img src="neuroAR2/img/IMG_1404.JPG" alt="Equipo trabajando con una plataforma de gestión del conocimiento empresarial de NeuroAr" width="640" height="480" loading="lazy" decoding="async">
-                </picture>
-              </div>
-            </div>
-
-            <!-- 4 -->
-            <div class="tabpanel" role="tabpanel" id="panel-cognitivo" aria-labelledby="tab-4" tabindex="0">
-              <div>
-                <h3>Realidad Virtual y NeuroAr Cognitivo</h3>
-                <p>Experiencias inmersivas de formación, simulación y entrenamiento para instituciones, empresas y personas, con pruebas cognitivas accesibles desde la app de NeuroAr.</p>
-                <ul class="checklist">
-                  <li>Experiencias educativas e inmersivas</li>
-                  <li>Entrenamiento cognitivo y habilidades humanas</li>
-                  <li>Aplicaciones para talento humano, educación y salud</li>
-                </ul>
-                <div class="btn-row">
-                  <a class="btn btn--primary" href="#contacto" data-service="cognitivo-vr" data-i18n="cta.consult">Consultar este servicio</a>
-                  <a class="btn btn--outline" href="#inmersivo">Ver NeuroAr Cognitivo</a>
-                </div>
-              </div>
-              <div class="visual" aria-hidden="true">
-                <svg viewBox="0 0 160 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
-                  <rect x="20" y="36" width="120" height="48" rx="20"/>
-                  <circle cx="60" cy="60" r="12"/><circle cx="100" cy="60" r="12"/>
-                  <path d="M20 60H8M140 60h12"/>
-                </svg>
-              </div>
-            </div>
-
-            <!-- 5 -->
-            <div class="tabpanel" role="tabpanel" id="panel-sostenibilidad" aria-labelledby="tab-5" tabindex="0">
-              <div>
-                <h3>Tecnología Industrial y Sostenibilidad</h3>
-                <p>Digitalización de operaciones, formación técnica, productividad y seguridad en el trabajo, junto con soluciones de realidad virtual y monitoreo inteligente para la sostenibilidad ambiental.</p>
-                <ul class="checklist">
-                  <li>Digitalización de operaciones industriales</li>
-                  <li>Formación técnica y seguridad y salud en el trabajo</li>
-                  <li>Simulaciones para conservación y uso eficiente de recursos</li>
-                  <li>Monitoreo inteligente y conciencia ambiental</li>
-                </ul>
-                <div class="btn-row">
-                  <a class="btn btn--primary" href="#contacto" data-service="sostenibilidad" data-i18n="cta.consult">Consultar este servicio</a>
-                  <a class="btn btn--outline" href="sostenibilidad">Ver sostenibilidad</a>
-                </div>
-              </div>
-              <div class="visual">
-                <picture>
-                  <source srcset="neuroAR2/img/sostenibilidad/gafas-verdes-sostenibilidad.webp" type="image/webp">
-                  <img src="neuroAR2/img/sostenibilidad/Gafas_verdes_sostenibilidad.jpg" alt="Gafas de realidad virtual de la solución de sostenibilidad ambiental de NeuroAr" width="640" height="480" loading="lazy" decoding="async">
-                </picture>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ol class="dmaic">
+          <li class="dmaic__step"><span class="dmaic__letter" aria-hidden="true">D</span><h3>Definir</h3><p>Problema, objetivos y valor esperado.</p><p class="dmaic__ai"><b>IA</b> sintetiza documentos e históricos.</p></li>
+          <li class="dmaic__step"><span class="dmaic__letter" aria-hidden="true">M</span><h3>Medir</h3><p>Línea base e indicadores confiables.</p><p class="dmaic__ai"><b>IA</b> automatiza captura y depuración de datos.</p></li>
+          <li class="dmaic__step"><span class="dmaic__letter" aria-hidden="true">A</span><h3>Analizar</h3><p>Causas raíz, patrones y oportunidades.</p><p class="dmaic__ai"><b>IA</b> detecta patrones y correlaciones.</p></li>
+          <li class="dmaic__step"><span class="dmaic__letter" aria-hidden="true">I</span><h3>Mejorar</h3><p>Soluciones a medida, probadas e implementadas.</p><p class="dmaic__ai"><b>IA</b> acelera prototipos y automatiza tareas.</p></li>
+          <li class="dmaic__step"><span class="dmaic__letter" aria-hidden="true">C</span><h3>Controlar</h3><p>Seguimiento para sostener las mejoras.</p><p class="dmaic__ai"><b>IA</b> monitorea y alerta desviaciones.</p></li>
+        </ol>
+        <p class="note">Nuestros especialistas validan cada paso con tu equipo. La IA acelera; las decisiones son humanas.</p>
       </div>
     </section>
 
-    <!-- ======================= MEJORAMIENTO + DMAIC ======================= -->
-    <section class="section" id="mejoramiento" aria-labelledby="mej-title">
-      <div class="container">
-        <div class="section__head">
-          <p class="eyebrow" data-i18n="dmaic.eyebrow">Agentes de Mejoramiento Inteligente · Lean Six Sigma + IA</p>
-          <h2 id="mej-title" data-i18n="dmaic.title">De los desafíos a resultados medibles.</h2>
-          <p class="lead" data-i18n="dmaic.lead">Combinamos la metodología DMAIC, la inteligencia artificial y el desarrollo tecnológico a la medida para diagnosticar, diseñar, implementar y sostener soluciones reales.</p>
-        </div>
-
-        <div class="dmaic-block" id="dmaic">
-          <h3 data-i18n="dmaic.method">DMAIC potenciado con IA</h3>
-          <p>La IA apoya de forma transversal el análisis, la automatización y el seguimiento; nuestros especialistas validan cada paso.</p>
-
-          <ol class="dmaic">
-            <li class="dmaic__step">
-              <div class="dmaic__head"><span class="dmaic__letter" aria-hidden="true">D</span><h4><span class="visually-hidden">1. </span>Definir</h4></div>
-              <p>Precisamos el problema, los objetivos y el valor esperado.</p>
-              <dl class="dmaic__roles">
-                <dt>IA</dt><dd>Sintetiza documentos e históricos para estructurar el problema.</dd>
-                <dt>Especialistas</dt><dd>Validan alcance, objetivos y valor esperado contigo.</dd>
-              </dl>
-            </li>
-            <li class="dmaic__step">
-              <div class="dmaic__head"><span class="dmaic__letter" aria-hidden="true">M</span><h4><span class="visually-hidden">2. </span>Medir</h4></div>
-              <p>Construimos líneas base e indicadores con datos confiables.</p>
-              <dl class="dmaic__roles">
-                <dt>IA</dt><dd>Automatiza la captura y depuración de datos.</dd>
-                <dt>Especialistas</dt><dd>Definen indicadores y verifican la calidad de la información.</dd>
-              </dl>
-            </li>
-            <li class="dmaic__step">
-              <div class="dmaic__head"><span class="dmaic__letter" aria-hidden="true">A</span><h4><span class="visually-hidden">3. </span>Analizar</h4></div>
-              <p>Identificamos causas raíz, patrones y oportunidades.</p>
-              <dl class="dmaic__roles">
-                <dt>IA</dt><dd>Detecta patrones y correlaciones en los datos.</dd>
-                <dt>Especialistas</dt><dd>Interpretan los hallazgos y confirman las causas raíz.</dd>
-              </dl>
-            </li>
-            <li class="dmaic__step">
-              <div class="dmaic__head"><span class="dmaic__letter" aria-hidden="true">I</span><h4><span class="visually-hidden">4. </span>Mejorar</h4></div>
-              <p>Desarrollamos, probamos e implementamos soluciones a medida.</p>
-              <dl class="dmaic__roles">
-                <dt>IA</dt><dd>Acelera prototipos y automatiza tareas repetitivas.</dd>
-                <dt>Especialistas</dt><dd>Diseñan, prueban e implementan junto a tu equipo.</dd>
-              </dl>
-            </li>
-            <li class="dmaic__step">
-              <div class="dmaic__head"><span class="dmaic__letter" aria-hidden="true">C</span><h4><span class="visually-hidden">5. </span>Controlar</h4></div>
-              <p>Monitoreamos resultados y sostenemos las mejoras.</p>
-              <dl class="dmaic__roles">
-                <dt>IA</dt><dd>Da seguimiento continuo y alerta sobre desviaciones.</dd>
-                <dt>Especialistas</dt><dd>Revisan resultados y ajustan estándares.</dd>
-              </dl>
-            </li>
-          </ol>
-
-          <ul class="outcomes">
-            <li><strong>Productividad</strong><span>Mejor uso de recursos y capacidad</span></li>
-            <li><strong>Eficiencia económica</strong><span>Ahorros y beneficios cuantificables</span></li>
-            <li><strong>Confiabilidad</strong><span>Procesos sostenibles y controlados</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================= NEUROAR COGNITIVO (REALIDAD VIRTUAL) ======================= -->
-    <section class="section section--soft" id="inmersivo" aria-labelledby="cog-title">
-      <div class="container split">
-        <div>
-          <p class="eyebrow" data-i18n="cog.eyebrow">Aprendizaje inmersivo</p>
-          <h2 id="cog-title" data-i18n="cog.title">NeuroAr Cognitivo: aprender también es experimentar</h2>
-          <p class="lead">La realidad virtual es una de nuestras capacidades diferenciadoras: la integramos en iniciativas de formación, desarrollo de habilidades y entrenamiento cognitivo.</p>
-          <ul class="checklist">
-            <li>Pruebas cognitivas en realidad virtual</li>
-            <li>Compatible con Meta Quest 2, 3 y 3S</li>
-            <li>Acceso desde la app en app.neuroar.com.co</li>
-            <li>Brochure descargable con el detalle del producto</li>
-          </ul>
-          <div class="btn-row">
-            <a class="btn btn--outline" href="https://app.neuroar.com.co/" data-i18n="cog.app">Ir a la app</a>
-            <!-- TODO: subir el brochure de NeuroAr Cognitivo con este nombre (o ajustar la ruta) -->
-            <a class="btn btn--outline" href="neuroAR2/img/pdf/brochure-neuroar-cognitivo.pdf" download data-i18n="cog.brochure">Ver brochure</a>
-          </div>
-        </div>
-        <div class="visual">
-          <picture>
-            <source srcset="neuroAR2/img/realidad-virtual-gafas.webp" type="image/webp">
-            <img src="neuroAR2/img/Gafas_2.jpg" alt="Persona usando gafas de realidad virtual con NeuroAr Cognitivo" width="640" height="480" loading="lazy" decoding="async">
-          </picture>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================= REFERENCIAS ======================= -->
+    <!-- ======================= TRAYECTORIA ======================= -->
     <section class="section" id="referencias" aria-labelledby="ref-title">
       <div class="container">
         <div class="section__head">
-          <p class="eyebrow" data-i18n="ref.eyebrow">Nuestra trayectoria y conexiones</p>
-          <h2 id="ref-title" data-i18n="ref.title">Organizaciones que impulsan la innovación con NeuroAr</h2>
+          <p class="eyebrow" data-i18n="ref.eyebrow">Trayectoria y conexiones</p>
+          <h2 id="ref-title" data-i18n="ref.title">Organizaciones con las que hemos construido camino</h2>
         </div>
 
         <ul class="refs">
-          <li><a class="ref" href="https://cerromatoso.com.co/" target="_blank" rel="noopener noreferrer"><span class="ref__tag">Industria</span><span class="ref__name">Cerro Matoso</span><span class="visually-hidden">(se abre en una pestaña nueva)</span></a></li>
+          <li><a class="ref" href="https://cerromatoso.com.co/" target="_blank" rel="noopener noreferrer"><span class="ref__tag">Minería</span><span class="ref__name">Cerro Matoso</span><span class="visually-hidden">(se abre en una pestaña nueva)</span></a></li>
           <li><a class="ref" href="https://www.sanjosevegas.edu.co/" target="_blank" rel="noopener noreferrer"><span class="ref__tag">Educación</span><span class="ref__name">San José de las Vegas</span><span class="visually-hidden">(se abre en una pestaña nueva)</span></a></li>
           <li><a class="ref" href="https://fundacionmaex.org/" target="_blank" rel="noopener noreferrer"><span class="ref__tag">Fundación</span><span class="ref__name">Fundación MAEX</span><span class="visually-hidden">(se abre en una pestaña nueva)</span></a></li>
           <li><a class="ref" href="https://tramites.alcaldiamontelibano.gov.co/" target="_blank" rel="noopener noreferrer"><span class="ref__tag">Sector público</span><span class="ref__name">Montelíbano</span><span class="visually-hidden">(se abre en una pestaña nueva)</span></a></li>
@@ -443,35 +384,34 @@
       </div>
     </section>
 
-    <!-- ======================= SOBRE NEUROAR Y PRESENCIA ======================= -->
+    <!-- ======================= NOSOTROS ======================= -->
     <section class="section section--soft" id="nosotros" aria-labelledby="about-title">
-      <div class="container split">
+      <div class="container split split--top">
         <div>
-          <p class="eyebrow" data-i18n="about.eyebrow">Nuestra visión</p>
-          <h2 id="about-title" data-i18n="about.title">Sobre NeuroAr y presencia en Colombia</h2>
-          <p class="lead">Tecnología al servicio de las personas y las organizaciones. Combinamos desarrollo tecnológico, innovación y conocimiento del factor humano para construir soluciones digitales que respondan a necesidades reales de empresas, instituciones educativas y entidades públicas.</p>
+          <p class="eyebrow" data-i18n="about.eyebrow">Quiénes somos</p>
+          <h2 id="about-title" data-i18n="about.title">Creemos que la tecnología más poderosa es la que entiende a las personas.</h2>
+          <p class="lead" data-i18n="about.lead">NeuroAr es una empresa colombiana de base tecnológica. Combinamos neurociencias, realidad virtual, inteligencia artificial y desarrollo de software para resolver necesidades reales de instituciones de salud, educación, empresas, industria y gobierno.</p>
         </div>
         <div>
-          <p>Nuestra sede principal está en Sabaneta, Antioquia, y tenemos presencia en Bogotá y Montería para acompañar proyectos tecnológicos, educativos e industriales.</p>
           <ul class="cities">
-            <li class="city"><strong>Sabaneta <span class="badge">Sede principal</span></strong><span>Antioquia · Dirección y articulación de proyectos</span></li>
-            <li class="city"><strong>Bogotá</strong><span>Distrito Capital · Presencia y relacionamiento</span></li>
+            <li class="city"><strong>Sabaneta <span class="badge" data-i18n="about.hq">Sede principal</span></strong><span>Antioquia · Dirección y desarrollo</span></li>
+            <li class="city"><strong>Bogotá</strong><span>Distrito Capital · Relacionamiento</span></li>
             <li class="city"><strong>Montería</strong><span>Córdoba · Acompañamiento regional</span></li>
           </ul>
-          <p class="note">Ubicaciones aproximadas por ciudad; no representan direcciones de oficinas.</p>
+          <p class="note">Presencia por ciudad; no representan direcciones de oficinas.</p>
         </div>
       </div>
     </section>
 
     <!-- ======================= CONTACTO ======================= -->
-    <section class="section" id="contacto" aria-labelledby="contact-title">
+    <section class="section contact-section" id="contacto" aria-labelledby="contact-title">
       <div class="container contact">
         <div>
           <p class="eyebrow" data-i18n="contact.eyebrow">Trabajemos juntos</p>
-          <h2 id="contact-title" data-i18n="contact.title">Cuéntanos tu desafío</h2>
-          <p class="lead">Conversemos sobre tu reto industrial, proyecto de mejoramiento continuo, software, automatización, plataforma de conocimiento o experiencia inmersiva.</p>
+          <h2 id="contact-title" data-i18n="contact.title">¿Qué capacidad humana quieres potenciar?</h2>
+          <p class="lead" data-i18n="contact.lead">Cuéntanos tu reto: un programa de rehabilitación, un proceso de orientación vocacional, un entrenamiento de alto riesgo o un proceso que necesita mejorar. Te respondemos con una propuesta concreta.</p>
           <ul class="contact__channels">
-            <li>Correo: <a href="mailto:Gerencia@neuroar.com.co">Gerencia@neuroar.com.co</a></li>
+            <li><span data-i18n="contact.mail">Correo</span>: <a href="mailto:Gerencia@neuroar.com.co">Gerencia@neuroar.com.co</a></li>
             <li>WhatsApp: <a href="https://wa.me/573003743575">300 374 3575</a></li>
           </ul>
         </div>
@@ -486,7 +426,7 @@
               <span class="field__error" id="error-nombre" aria-live="polite"></span>
             </div>
             <div class="field">
-              <label for="empresa"><span data-i18n="form.company">Empresa o institución</span> <span class="opt">(opcional)</span></label>
+              <label for="empresa"><span data-i18n="form.company">Empresa o institución</span> <span class="opt" data-i18n="form.optional">(opcional)</span></label>
               <input id="empresa" name="empresa" type="text" autocomplete="organization" placeholder="Tu organización" data-i18n-placeholder="form.company">
             </div>
           </div>
@@ -498,7 +438,7 @@
               <span class="field__error" id="error-correo" aria-live="polite"></span>
             </div>
             <div class="field">
-              <label for="telefono"><span data-i18n="form.phone">Teléfono / WhatsApp</span> <span class="opt">(opcional)</span></label>
+              <label for="telefono"><span data-i18n="form.phone">Teléfono / WhatsApp</span> <span class="opt" data-i18n="form.optional">(opcional)</span></label>
               <input id="telefono" name="telefono" type="tel" autocomplete="tel" placeholder="Ej. 300 000 0000" data-i18n-placeholder="form.phone">
             </div>
           </div>
@@ -507,11 +447,12 @@
             <label for="servicio" data-i18n="form.service">Servicio de interés</label>
             <select id="servicio" name="servicio" required aria-describedby="error-servicio">
               <option value="">Selecciona un servicio</option>
-              <option value="software-ia">Software a medida e IA</option>
-              <option value="dmaic-ia">Agentes de Mejoramiento DMAIC + IA</option>
-              <option value="conocimiento">Plataformas de Conocimiento Empresarial</option>
-              <option value="cognitivo-vr">Realidad Virtual y NeuroAr Cognitivo</option>
-              <option value="sostenibilidad">Tecnología Industrial y Sostenibilidad</option>
+              <option value="neuro-salud">Neurorehabilitación y NeuroAr Cognitivo</option>
+              <option value="educacion">Orientación vocacional y educación inmersiva</option>
+              <option value="industria-vr">Entrenamiento inmersivo para industria</option>
+              <option value="dmaic-ia">Agentes de mejoramiento DMAIC + IA</option>
+              <option value="software-ia">Software a medida y analítica predictiva</option>
+              <option value="sostenibilidad">Sostenibilidad ambiental</option>
               <option value="otro">Otro / aún no lo sé</option>
             </select>
             <span class="field__error" id="error-servicio" aria-live="polite"></span>
@@ -537,7 +478,7 @@
             <input id="sitio_web" name="sitio_web" type="text" tabindex="-1" autocomplete="off">
           </div>
 
-          <button class="btn btn--primary" type="submit" data-i18n="form.submit">Enviar solicitud</button>
+          <button class="btn btn--primary btn--lg" type="submit" data-i18n="form.submit">Enviar solicitud</button>
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -547,19 +488,22 @@
   <!-- ======================= FOOTER ======================= -->
   <footer class="site-footer">
     <div class="container">
+      <p class="footer-big" aria-hidden="true">Neuro<span>Ar</span></p>
       <div class="site-footer__grid">
         <div class="site-footer__brand">
-          <img src="neuroAR2/img/logo-blanco-neuroar.png" alt="NeuroAr" width="140" height="32" loading="lazy">
-          <p data-i18n="footer.tagline">Software · Conocimiento · Innovación</p>
+          <img src="/neuroAR2/img/logo-blanco-neuroar.png" alt="NeuroAr" width="140" height="32" loading="lazy">
+          <p data-i18n="footer.tagline">Neurociencia · Realidad virtual · Inteligencia artificial</p>
           <p><a href="mailto:Gerencia@neuroar.com.co">Gerencia@neuroar.com.co</a> · <a href="https://wa.me/573003743575">300 374 3575</a></p>
         </div>
         <ul class="footer-links">
+          <li><a href="https://app.neuroar.com.co/" data-i18n="nav.app">App NeuroAr</a></li>
+          <li><a href="https://testvocacional.neuroar.com.co/" target="_blank" rel="noopener noreferrer" data-i18n="footer.test">Test vocacional</a></li>
           <li><a href="sostenibilidad" data-i18n="footer.sustainability">Sostenibilidad</a></li>
           <li><a href="https://www.instagram.com/neuroar_co/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
           <li><a href="https://www.linkedin.com/in/neuroar-colombia-ab360a355" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
         </ul>
       </div>
-      <p class="footer-copy">© 2026 NeuroAr</p>
+      <p class="footer-copy">© 2026 NeuroAr · Sabaneta, Antioquia, Colombia</p>
     </div>
   </footer>
 
@@ -568,19 +512,19 @@
     <div class="chat-widget__panel" id="widget-panel" role="dialog" aria-label="Asistente virtual NeuroAr" aria-modal="false" tabindex="-1" hidden>
       <button class="chat-widget__close" id="widget-close" type="button" aria-label="Cerrar">×</button>
       <div class="chat-widget__top">
-        <img src="neuroAR2/img/asistente-neuroar.gif" alt="" width="64" height="64" loading="lazy">
+        <img src="/neuroAR2/img/asistente-neuroar.gif" alt="" width="64" height="64" loading="lazy">
         <div>
-          <span class="chat-widget__status"><i aria-hidden="true"></i> Disponible ahora</span>
+          <span class="chat-widget__status"><i aria-hidden="true"></i> <span data-i18n="widget.status">Disponible ahora</span></span>
           <p data-i18n="widget.hello">¡Hola! Soy el asistente de NeuroAr.</p>
         </div>
       </div>
       <div class="chat-widget__messages" id="widget-messages" aria-live="polite">
-        <p class="chat-bubble">Cuéntame qué reto quieres resolver y te orientaré hacia la solución indicada.</p>
+        <p class="chat-bubble" data-i18n="widget.ask">¿Para qué tipo de organización buscas una solución?</p>
       </div>
       <div class="chat-widget__choices" aria-label="Temas de ayuda">
-        <button type="button" data-widget-topic="software">Software e IA</button>
-        <button type="button" data-widget-topic="dmaic">Mejoramiento DMAIC</button>
-        <button type="button" data-widget-topic="inmersivo">Realidad virtual</button>
+        <button type="button" data-widget-topic="salud" data-i18n="widget.t1">Salud</button>
+        <button type="button" data-widget-topic="educacion" data-i18n="widget.t2">Educación</button>
+        <button type="button" data-widget-topic="industria" data-i18n="widget.t3">Empresa o industria</button>
       </div>
       <div class="chat-widget__actions">
         <a class="btn btn--primary" id="widget-whatsapp" href="https://wa.me/573003743575?text=Hola%2C%20quiero%20conocer%20las%20soluciones%20de%20NeuroAr" target="_blank" rel="noopener noreferrer" data-i18n="widget.whatsapp">Continuar por WhatsApp</a>
