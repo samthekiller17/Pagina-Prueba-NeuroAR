@@ -309,6 +309,7 @@
     let frameId = 0;
     let visible = true;
     const pointer = { x: -9999, y: -9999, active: false };
+    let covered = false; // el inicio queda tapado por el contenido (efecto stack)
 
     // ¿Está (x, y, z) dentro del cerebro? Coordenadas normalizadas ~[-1, 1].
     const insideBrain = (x, y, z) => {
@@ -459,7 +460,7 @@
         if (near >= 0) spawnPulse(near);
       }
 
-      if (!reducedMotion && visible) frameId = window.requestAnimationFrame(draw);
+      if (!reducedMotion && visible && !covered) frameId = window.requestAnimationFrame(draw);
       else frameId = 0;
     };
 
@@ -487,6 +488,12 @@
         if (visible && !frameId) frameId = window.requestAnimationFrame(draw);
       }, { threshold: 0.02 }).observe(heroSection);
     }
+    // Con el inicio fijo y tapado, el lienzo sigue "visible" para el
+    // IntersectionObserver: se pausa con el aviso del efecto stack.
+    heroSection.addEventListener('stack:cover', (event) => {
+      covered = event.detail;
+      if (!covered && visible && !reducedMotion && !frameId) frameId = window.requestAnimationFrame(draw);
+    });
   }
 
   /* ---- 6. Rotador de palabras del titular ------------------------------- */
@@ -875,6 +882,12 @@
         if (!next) return;
         const p = Math.min(Math.max((viewport - next.getBoundingClientRect().top) / viewport, 0), 1);
         panel.style.setProperty('--p', p.toFixed(3));
+        // Totalmente tapada: avisa para pausar animaciones que ya no se ven
+        const covered = p >= 0.999;
+        if (covered !== panel.classList.contains('is-covered')) {
+          panel.classList.toggle('is-covered', covered);
+          panel.dispatchEvent(new CustomEvent('stack:cover', { detail: covered }));
+        }
       });
     };
     const requestCover = () => {
