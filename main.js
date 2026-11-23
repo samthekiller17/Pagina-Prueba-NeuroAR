@@ -843,6 +843,55 @@
     card.style.setProperty('--my', `${event.clientY - rect.top}px`);
   });
 
+  /* ---- 16. Secciones superpuestas (stack) -------------------------------
+     --stick-top: las secciones más altas que la pantalla se fijan cuando su
+     final toca el borde inferior (top negativo); las cortas, bajo el header.
+     --p: cuánto las cubre la sección siguiente (0 → 1): se encogen y oscurecen. */
+  const stackPanels = $$('.stack');
+  if (stackPanels.length) {
+    const siteHeader = $('.site-header');
+    stackPanels.forEach((panel) => {
+      const shade = document.createElement('span');
+      shade.className = 'stack-shade';
+      shade.setAttribute('aria-hidden', 'true');
+      panel.appendChild(shade);
+    });
+
+    const measure = () => {
+      const viewport = window.innerHeight;
+      const header = siteHeader ? siteHeader.offsetHeight : 0;
+      stackPanels.forEach((panel) => {
+        panel.style.setProperty('--stick-top', `${Math.min(header, viewport - panel.offsetHeight)}px`);
+      });
+    };
+
+    let ticking = false;
+    const updateCover = () => {
+      ticking = false;
+      if (reducedMotion) return;
+      const viewport = window.innerHeight;
+      stackPanels.forEach((panel, i) => {
+        const next = stackPanels[i + 1] || $('.site-footer');
+        if (!next) return;
+        const p = Math.min(Math.max((viewport - next.getBoundingClientRect().top) / viewport, 0), 1);
+        panel.style.setProperty('--p', p.toFixed(3));
+      });
+    };
+    const requestCover = () => {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(updateCover); }
+    };
+
+    measure();
+    updateCover();
+    window.addEventListener('scroll', requestCover, { passive: true });
+    window.addEventListener('resize', () => { measure(); requestCover(); });
+    // Si cambia el alto de una sección (idioma, resultados de la demo, fuentes)
+    if ('ResizeObserver' in window) {
+      const resizeObserver = new ResizeObserver(() => { measure(); requestCover(); });
+      stackPanels.forEach((panel) => resizeObserver.observe(panel));
+    }
+  }
+
   /* ---- 15. Imágenes que faltan en el hosting ----------------------------
      Si una foto no existe, se oculta su contenedor en vez de mostrar el
      icono roto. Si falta el logo, se muestra la marca en texto.             */
